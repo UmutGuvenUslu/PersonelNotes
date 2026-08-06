@@ -2,16 +2,406 @@
     {
         "id": "809d1653626c3638",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "PersonelNodesBackend",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "1b2a88e851c47ac0",
-        "type": "inject",
+        "id": "1c407d057fc67ad1",
+        "type": "subflow",
+        "name": "Subflow 1",
+        "info": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "bb2947c7ccf8e0f8"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 500,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "9d7c19809c4bd150",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "88e02e7f42efbf38",
+        "type": "subflow",
+        "name": "Subflow 2",
+        "info": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "fc707f20c67e7f1c"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 580,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "17dfeb5fcd6cd532",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "b754acafb346a06c",
+        "type": "subflow",
+        "name": "Subflow 3",
+        "info": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "4faf1cbfdd0c0153"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 540,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "a013c5cffe6f2721",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "6400ad6cb5353ade",
+        "type": "mongodb4-client",
+        "name": "local",
+        "protocol": "mongodb",
+        "hostname": "localhost",
+        "port": "27017",
+        "dbName": "PersonalNotes",
+        "appName": "",
+        "authSource": "",
+        "authMechanism": "DEFAULT",
+        "tls": false,
+        "tlsCAFile": "",
+        "tlsCertificateKeyFile": "",
+        "tlsInsecure": false,
+        "connectTimeoutMS": "30000",
+        "socketTimeoutMS": "0",
+        "minPoolSize": "0",
+        "maxPoolSize": "100",
+        "maxIdleTimeMS": "0",
+        "uri": "",
+        "advanced": "{}",
+        "uriTabActive": "tab-uri-simple"
+    },
+    {
+        "id": "9d7c19809c4bd150",
+        "type": "mongodb4",
+        "z": "1c407d057fc67ad1",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "notes",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 370,
+        "y": 160,
+        "wires": [
+            [
+                "4c7c82f0ee056fdb"
+            ]
+        ]
+    },
+    {
+        "id": "bb2947c7ccf8e0f8",
+        "type": "function",
+        "z": "1c407d057fc67ad1",
+        "name": "Filtre",
+        "func": "const kullanici = msg.payload.kullanici;\n\nif (kullanici) {\n    msg.payload = { kullanici: kullanici };\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 190,
+        "y": 160,
+        "wires": [
+            [
+                "9d7c19809c4bd150",
+                "550fd540bbc28373"
+            ]
+        ]
+    },
+    {
+        "id": "550fd540bbc28373",
+        "type": "debug",
+        "z": "1c407d057fc67ad1",
+        "name": "Note->Filtre",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 270,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "4c7c82f0ee056fdb",
+        "type": "debug",
+        "z": "1c407d057fc67ad1",
+        "name": "Note->Filtre->Find",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "17dfeb5fcd6cd532",
+        "type": "mongodb4",
+        "z": "88e02e7f42efbf38",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "notes",
+        "operation": "deleteOne",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": true,
+        "name": "",
+        "x": 430,
+        "y": 140,
+        "wires": [
+            [
+                "b93e46e671b4b2df"
+            ]
+        ]
+    },
+    {
+        "id": "992f0950f3cf93cf",
+        "type": "debug",
+        "z": "88e02e7f42efbf38",
+        "name": "Delete->Filtre",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 240,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "b93e46e671b4b2df",
+        "type": "debug",
+        "z": "88e02e7f42efbf38",
+        "name": "Delete->Filtre->deleteOne",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "fc707f20c67e7f1c",
+        "type": "function",
+        "z": "88e02e7f42efbf38",
+        "name": "Filtre",
+        "func": "const id = msg.req.params.id;\n\nmsg.payload =[ {_id: id} ] ;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "17dfeb5fcd6cd532",
+                "992f0950f3cf93cf"
+            ]
+        ]
+    },
+    {
+        "id": "4faf1cbfdd0c0153",
+        "type": "function",
+        "z": "b754acafb346a06c",
+        "name": "Filtre",
+        "func": "const noteId = msg.req.params.id;\nconst updateData = msg.payload;\n\nmsg.payload = [\n    { _id: noteId },\n    { $set: updateData }\n];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "a013c5cffe6f2721",
+                "27a65291dd958040"
+            ]
+        ]
+    },
+    {
+        "id": "a013c5cffe6f2721",
+        "type": "mongodb4",
+        "z": "b754acafb346a06c",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "notes",
+        "operation": "updateOne",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": true,
+        "name": "",
+        "x": 390,
+        "y": 140,
+        "wires": [
+            [
+                "9984271a7a25a8ad"
+            ]
+        ]
+    },
+    {
+        "id": "27a65291dd958040",
+        "type": "debug",
+        "z": "b754acafb346a06c",
+        "name": "Filtre",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 190,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "9984271a7a25a8ad",
+        "type": "debug",
+        "z": "b754acafb346a06c",
+        "name": "Filtre->updateOne",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 390,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "eeec896f114ad812",
+        "type": "http in",
         "z": "809d1653626c3638",
         "name": "",
+        "url": "/note",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 220,
+        "y": 120,
+        "wires": [
+            [
+                "b9e22724ce992239"
+            ]
+        ]
+    },
+    {
+        "id": "469d623e351bfb70",
+        "type": "http in",
+        "z": "809d1653626c3638",
+        "name": "",
+        "url": "/note/:id",
+        "method": "put",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "764ac1994c81526d"
+            ]
+        ]
+    },
+    {
+        "id": "5cde189d514f1aca",
+        "type": "http in",
+        "z": "809d1653626c3638",
+        "name": "",
+        "url": "/note/:id",
+        "method": "delete",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 240,
+        "y": 180,
+        "wires": [
+            [
+                "c4a1213c21d685c6"
+            ]
+        ]
+    },
+    {
+        "id": "986f0724305b41e7",
+        "type": "inject",
+        "z": "809d1653626c3638",
+        "name": "Sync",
         "props": [
             {
                 "p": "payload"
@@ -21,35 +411,224 @@
                 "vt": "str"
             }
         ],
-        "repeat": "",
+        "repeat": "120",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 300,
-        "y": 400,
+        "x": 210,
+        "y": 460,
         "wires": [
             [
-                "ea8305b63152d4cb"
+                "9fcf7b2e0e414ca4"
             ]
         ]
     },
     {
-        "id": "ea8305b63152d4cb",
+        "id": "db136b2678b4726e",
+        "type": "catch",
+        "z": "809d1653626c3638",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 380,
+        "y": 320,
+        "wires": [
+            [
+                "2c18eeb3e8c28187"
+            ]
+        ]
+    },
+    {
+        "id": "2c18eeb3e8c28187",
         "type": "debug",
         "z": "809d1653626c3638",
-        "name": "debug 1",
+        "name": "HataLog",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 520,
-        "y": 360,
+        "x": 640,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "0ef092a510c343b0",
+        "type": "http response",
+        "z": "809d1653626c3638",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 790,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "37f6321063133f80",
+        "type": "http response",
+        "z": "809d1653626c3638",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 790,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "9ad4aa469567a9a8",
+        "type": "http response",
+        "z": "809d1653626c3638",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 790,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b9e22724ce992239",
+        "type": "subflow:1c407d057fc67ad1",
+        "z": "809d1653626c3638",
+        "name": "GetByName",
+        "x": 510,
+        "y": 120,
+        "wires": [
+            [
+                "0ef092a510c343b0"
+            ]
+        ]
+    },
+    {
+        "id": "c4a1213c21d685c6",
+        "type": "subflow:88e02e7f42efbf38",
+        "z": "809d1653626c3638",
+        "name": "DeleteOne",
+        "x": 510,
+        "y": 180,
+        "wires": [
+            [
+                "9ad4aa469567a9a8"
+            ]
+        ]
+    },
+    {
+        "id": "764ac1994c81526d",
+        "type": "subflow:b754acafb346a06c",
+        "z": "809d1653626c3638",
+        "name": "UpdateOne",
+        "x": 510,
+        "y": 240,
+        "wires": [
+            [
+                "37f6321063133f80"
+            ]
+        ]
+    },
+    {
+        "id": "9fcf7b2e0e414ca4",
+        "type": "function",
+        "z": "809d1653626c3638",
+        "name": "VeriKontrol",
+        "func": "if (!msg.payload || !Array.isArray(msg.payload.records)) {\n    msg.statusCode = 400;\n    msg.payload = { status: \"error\", message: \"Geçersiz veri formatı\" };\n    return [null, msg];\n}\n\nmsg.payload = msg.payload.records.map(record => ({\n    query: { uuid: record.uuid }, \n    update: { $setOnInsert: record }, \n    options: { upsert: true }\n}));\n\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 500,
+        "wires": [
+            [
+                "2c67db45e2d39442"
+            ],
+            [
+                "386aed7adedb5697",
+                "eadcd3a287dc9842"
+            ]
+        ]
+    },
+    {
+        "id": "386aed7adedb5697",
+        "type": "mongodb4",
+        "z": "809d1653626c3638",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "notes",
+        "operation": "insertMany",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": true,
+        "name": "",
+        "x": 630,
+        "y": 580,
+        "wires": [
+            [
+                "38c6206dd5a1eb99",
+                "650ca30bc6840b41"
+            ]
+        ]
+    },
+    {
+        "id": "38c6206dd5a1eb99",
+        "type": "http response",
+        "z": "809d1653626c3638",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 810,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "2c67db45e2d39442",
+        "type": "http response",
+        "z": "809d1653626c3638",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 770,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "eadcd3a287dc9842",
+        "type": "debug",
+        "z": "809d1653626c3638",
+        "name": "Sync->VeriKontrol",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 370,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "650ca30bc6840b41",
+        "type": "debug",
+        "z": "809d1653626c3638",
+        "name": "Sync->VeriKontrol->insertMany",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 660,
         "wires": []
     }
 ]
