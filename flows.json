@@ -76,7 +76,7 @@
                 "y": 140,
                 "wires": [
                     {
-                        "id": "4faf1cbfdd0c0153"
+                        "id": "a013c5cffe6f2721"
                     }
                 ]
             }
@@ -88,6 +88,206 @@
                 "wires": [
                     {
                         "id": "a013c5cffe6f2721",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "9d6976a8b5a31ec7",
+        "type": "subflow",
+        "name": "Subflow 4",
+        "info": "",
+        "in": [],
+        "out": []
+    },
+    {
+        "id": "5cdcc70dcac84c81",
+        "type": "subflow",
+        "name": "Subflow 5",
+        "info": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "2d757ff2e74d181f"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 500,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "2d757ff2e74d181f",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "cb699f4ac2c58699",
+        "type": "subflow",
+        "name": "Subflow 6",
+        "info": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "ba1b0eccfe2533b3"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 740,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "4276f4e8af401bd5",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "95fe5ff624152c3f",
+        "type": "subflow",
+        "name": "Subflow 7",
+        "info": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "bede27b09ba670f5"
+                    }
+                ]
+            }
+        ],
+        "out": []
+    },
+    {
+        "id": "d82cc3adf5c288a2",
+        "type": "subflow",
+        "name": "Subflow 8",
+        "info": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "7e9d77eb871def5a"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 740,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "dfae90181a405998",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "35b964c2a4e7b812",
+        "type": "subflow",
+        "name": "Subflow 9",
+        "info": "",
+        "in": [
+            {
+                "x": 120,
+                "y": 320,
+                "wires": [
+                    {
+                        "id": "045d79265c19726e"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 860,
+                "y": 320,
+                "wires": [
+                    {
+                        "id": "6c9b7d9dd15c0dbe",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "59b03ea7b921cbf5",
+        "type": "subflow",
+        "name": "Subflow 10",
+        "info": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "f5a6d64bd28aeed0"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 740,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "7784e75c6e79a6d9",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "6d6293de96db0c41",
+        "type": "subflow",
+        "name": "Subflow 11",
+        "info": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "836c7d56548a756c"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 360,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "836c7d56548a756c",
                         "port": 0
                     }
                 ]
@@ -269,39 +469,18 @@
         ]
     },
     {
-        "id": "4faf1cbfdd0c0153",
-        "type": "function",
-        "z": "b754acafb346a06c",
-        "name": "Filtre",
-        "func": "const noteId = msg.req.params.id;\nconst updateData = msg.payload;\n\nmsg.payload = [\n    { _id: noteId },\n    { $set: updateData }\n];\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 190,
-        "y": 140,
-        "wires": [
-            [
-                "a013c5cffe6f2721",
-                "27a65291dd958040"
-            ]
-        ]
-    },
-    {
         "id": "a013c5cffe6f2721",
         "type": "mongodb4",
         "z": "b754acafb346a06c",
         "clientNode": "6400ad6cb5353ade",
         "mode": "collection",
         "collection": "notes",
-        "operation": "updateOne",
+        "operation": "create",
         "output": "toArray",
         "maxTimeMS": "0",
         "handleDocId": true,
         "name": "",
-        "x": 390,
+        "x": 330,
         "y": 140,
         "wires": [
             [
@@ -310,27 +489,10 @@
         ]
     },
     {
-        "id": "27a65291dd958040",
-        "type": "debug",
-        "z": "b754acafb346a06c",
-        "name": "Filtre",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 190,
-        "y": 80,
-        "wires": []
-    },
-    {
         "id": "9984271a7a25a8ad",
         "type": "debug",
         "z": "b754acafb346a06c",
-        "name": "Filtre->updateOne",
+        "name": "Filtre->CreateOne",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -344,63 +506,9 @@
         "wires": []
     },
     {
-        "id": "eeec896f114ad812",
-        "type": "http in",
-        "z": "809d1653626c3638",
-        "name": "",
-        "url": "/note",
-        "method": "get",
-        "upload": false,
-        "skipBodyParsing": false,
-        "swaggerDoc": "",
-        "x": 220,
-        "y": 120,
-        "wires": [
-            [
-                "b9e22724ce992239"
-            ]
-        ]
-    },
-    {
-        "id": "469d623e351bfb70",
-        "type": "http in",
-        "z": "809d1653626c3638",
-        "name": "",
-        "url": "/note/:id",
-        "method": "put",
-        "upload": false,
-        "skipBodyParsing": false,
-        "swaggerDoc": "",
-        "x": 230,
-        "y": 240,
-        "wires": [
-            [
-                "764ac1994c81526d"
-            ]
-        ]
-    },
-    {
-        "id": "5cde189d514f1aca",
-        "type": "http in",
-        "z": "809d1653626c3638",
-        "name": "",
-        "url": "/note/:id",
-        "method": "delete",
-        "upload": false,
-        "skipBodyParsing": false,
-        "swaggerDoc": "",
-        "x": 240,
-        "y": 180,
-        "wires": [
-            [
-                "c4a1213c21d685c6"
-            ]
-        ]
-    },
-    {
         "id": "986f0724305b41e7",
         "type": "inject",
-        "z": "809d1653626c3638",
+        "z": "9d6976a8b5a31ec7",
         "name": "Sync",
         "props": [
             {
@@ -418,122 +526,16 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 210,
-        "y": 460,
+        "x": 170,
+        "y": 80,
         "wires": [
-            [
-                "9fcf7b2e0e414ca4"
-            ]
-        ]
-    },
-    {
-        "id": "db136b2678b4726e",
-        "type": "catch",
-        "z": "809d1653626c3638",
-        "name": "",
-        "scope": null,
-        "uncaught": false,
-        "x": 380,
-        "y": 320,
-        "wires": [
-            [
-                "2c18eeb3e8c28187"
-            ]
-        ]
-    },
-    {
-        "id": "2c18eeb3e8c28187",
-        "type": "debug",
-        "z": "809d1653626c3638",
-        "name": "HataLog",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 640,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "0ef092a510c343b0",
-        "type": "http response",
-        "z": "809d1653626c3638",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 790,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "37f6321063133f80",
-        "type": "http response",
-        "z": "809d1653626c3638",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 790,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "9ad4aa469567a9a8",
-        "type": "http response",
-        "z": "809d1653626c3638",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 790,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "b9e22724ce992239",
-        "type": "subflow:1c407d057fc67ad1",
-        "z": "809d1653626c3638",
-        "name": "GetByName",
-        "x": 510,
-        "y": 120,
-        "wires": [
-            [
-                "0ef092a510c343b0"
-            ]
-        ]
-    },
-    {
-        "id": "c4a1213c21d685c6",
-        "type": "subflow:88e02e7f42efbf38",
-        "z": "809d1653626c3638",
-        "name": "DeleteOne",
-        "x": 510,
-        "y": 180,
-        "wires": [
-            [
-                "9ad4aa469567a9a8"
-            ]
-        ]
-    },
-    {
-        "id": "764ac1994c81526d",
-        "type": "subflow:b754acafb346a06c",
-        "z": "809d1653626c3638",
-        "name": "UpdateOne",
-        "x": 510,
-        "y": 240,
-        "wires": [
-            [
-                "37f6321063133f80"
-            ]
+            []
         ]
     },
     {
         "id": "9fcf7b2e0e414ca4",
         "type": "function",
-        "z": "809d1653626c3638",
+        "z": "9d6976a8b5a31ec7",
         "name": "VeriKontrol",
         "func": "if (!msg.payload || !Array.isArray(msg.payload.records)) {\n    msg.statusCode = 400;\n    msg.payload = { status: \"error\", message: \"Geçersiz veri formatı\" };\n    return [null, msg];\n}\n\nmsg.payload = msg.payload.records.map(record => ({\n    query: { uuid: record.uuid }, \n    update: { $setOnInsert: record }, \n    options: { upsert: true }\n}));\n\nreturn [msg, null];",
         "outputs": 2,
@@ -542,8 +544,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
-        "y": 500,
+        "x": 410,
+        "y": 120,
         "wires": [
             [
                 "2c67db45e2d39442"
@@ -557,7 +559,7 @@
     {
         "id": "386aed7adedb5697",
         "type": "mongodb4",
-        "z": "809d1653626c3638",
+        "z": "9d6976a8b5a31ec7",
         "clientNode": "6400ad6cb5353ade",
         "mode": "collection",
         "collection": "notes",
@@ -566,8 +568,8 @@
         "maxTimeMS": "0",
         "handleDocId": true,
         "name": "",
-        "x": 630,
-        "y": 580,
+        "x": 610,
+        "y": 200,
         "wires": [
             [
                 "38c6206dd5a1eb99",
@@ -578,29 +580,29 @@
     {
         "id": "38c6206dd5a1eb99",
         "type": "http response",
-        "z": "809d1653626c3638",
+        "z": "9d6976a8b5a31ec7",
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 810,
-        "y": 580,
+        "x": 790,
+        "y": 200,
         "wires": []
     },
     {
         "id": "2c67db45e2d39442",
         "type": "http response",
-        "z": "809d1653626c3638",
+        "z": "9d6976a8b5a31ec7",
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 770,
-        "y": 460,
+        "x": 750,
+        "y": 80,
         "wires": []
     },
     {
         "id": "eadcd3a287dc9842",
         "type": "debug",
-        "z": "809d1653626c3638",
+        "z": "9d6976a8b5a31ec7",
         "name": "Sync->VeriKontrol",
         "active": true,
         "tosidebar": true,
@@ -610,14 +612,14 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 370,
-        "y": 580,
+        "x": 350,
+        "y": 200,
         "wires": []
     },
     {
         "id": "650ca30bc6840b41",
         "type": "debug",
-        "z": "809d1653626c3638",
+        "z": "9d6976a8b5a31ec7",
         "name": "Sync->VeriKontrol->insertMany",
         "active": true,
         "tosidebar": true,
@@ -627,8 +629,729 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 630,
+        "x": 610,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "2d757ff2e74d181f",
+        "type": "mongodb4",
+        "z": "5cdcc70dcac84c81",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "notes",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "6900cde350ae2d83"
+            ]
+        ]
+    },
+    {
+        "id": "6900cde350ae2d83",
+        "type": "debug",
+        "z": "5cdcc70dcac84c81",
+        "name": "/notes -> Filtre -> find",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 280,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ba1b0eccfe2533b3",
+        "type": "function",
+        "z": "cb699f4ac2c58699",
+        "name": "Not Normalizasyon",
+        "func": "let n = msg.payload;\n\nif (n == null || n._id== null  || n.baslik == null ) {\n    msg.payload = { hata: \"Id ve başlık bilgileri zorunludur.\" };\n    return [null, msg];\n}\n\nlet note = {\n    _id:              n._id,\n    baslik:           n.baslik,\n    aciklama:         n.aciklama || \"\",\n    oncelik:          n.oncelik || 2,\n    silindiMi:        n.silindiMi === true,\n    guncellemeTarihi: n.guncellemeTarihi || Date.now()\n};\n\nmsg.not = note;\n\n\n\nmsg.payload = [ \n    { _id: note._id }, \n    note, \n    { upsert: true } \n    ];\n\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 280,
+        "wires": [
+            [
+                "4276f4e8af401bd5"
+            ],
+            [
+                "9036050273c9955b"
+            ]
+        ]
+    },
+    {
+        "id": "4276f4e8af401bd5",
+        "type": "mongodb4",
+        "z": "cb699f4ac2c58699",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "notes",
+        "operation": "replaceOne",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 490,
+        "y": 280,
+        "wires": [
+            [
+                "6382db40dc023e9f"
+            ]
+        ]
+    },
+    {
+        "id": "6382db40dc023e9f",
+        "type": "debug",
+        "z": "cb699f4ac2c58699",
+        "name": "POST /note -> mongo sonucu",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "9036050273c9955b",
+        "type": "http response",
+        "z": "cb699f4ac2c58699",
+        "name": "Hata",
+        "statusCode": "",
+        "headers": {},
+        "x": 430,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "bede27b09ba670f5",
+        "type": "function",
+        "z": "95fe5ff624152c3f",
+        "name": "Kontrol",
+        "func": "msg.payload = [ { silindiMi: false } ];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "334d0e3feba043c4"
+            ]
+        ]
+    },
+    {
+        "id": "334d0e3feba043c4",
+        "type": "mongodb4",
+        "z": "95fe5ff624152c3f",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "notes",
+        "operation": "countDocuments",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 430,
+        "y": 80,
+        "wires": [
+            [
+                "157aeadf86b6a973"
+            ]
+        ]
+    },
+    {
+        "id": "157aeadf86b6a973",
+        "type": "function",
+        "z": "95fe5ff624152c3f",
+        "name": "Log",
+        "func": "msg.payload = \"Arka plan kontrol: \" + msg.payload + \" aktif not\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 80,
+        "wires": [
+            [
+                "08ae3f451de7ce2c"
+            ]
+        ]
+    },
+    {
+        "id": "08ae3f451de7ce2c",
+        "type": "debug",
+        "z": "95fe5ff624152c3f",
+        "name": "ArkaPlanLog",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "7e9d77eb871def5a",
+        "type": "function",
+        "z": "d82cc3adf5c288a2",
+        "name": "DeleteFiltre",
+        "func": "const id = msg.req.params.id;\n\nif (id == null) {\n    msg.payload = { hata: \"Lütfen id girişi yapınız.\" };\n    return [null, msg];\n}\n\nmsg.payload = [ { _id: id } ];\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 200,
+        "wires": [
+            [
+                "dfae90181a405998"
+            ],
+            [
+                "328c09a871bad021"
+            ]
+        ]
+    },
+    {
+        "id": "dfae90181a405998",
+        "type": "mongodb4",
+        "z": "d82cc3adf5c288a2",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "notes",
+        "operation": "deleteOne",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 450,
+        "y": 200,
+        "wires": [
+            [
+                "9e52328bccdab428"
+            ]
+        ]
+    },
+    {
+        "id": "9e52328bccdab428",
+        "type": "debug",
+        "z": "d82cc3adf5c288a2",
+        "name": "/note/:id -> DeleteFiltre -> deleteOne",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "328c09a871bad021",
+        "type": "http response",
+        "z": "d82cc3adf5c288a2",
+        "name": "Hata",
+        "statusCode": "",
+        "headers": {},
+        "x": 290,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "045d79265c19726e",
+        "type": "function",
+        "z": "35b964c2a4e7b812",
+        "name": "GüncellemeFiltre",
+        "func": "const id = msg.req.params.id;\nconst n  = msg.payload || {};\n\nif (id == null) {\n    msg.payload = { hata: \"id zorunlu\" };\n    return [null, msg];\n}\n\nconst alanlar = {\n    baslik:           n.baslik,\n    aciklama:         n.aciklama || \"\",\n    oncelik:          n.oncelik || 2,\n    silindiMi:        n.silindiMi,\n    guncellemeTarihi: n.guncellemeTarihi\n};\n\n\nmsg.payload = [ \n    { _id: id }, \n    { $set: alanlar }, \n    { upsert: true } \n    ];\n\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 320,
+        "wires": [
+            [
+                "6c9b7d9dd15c0dbe"
+            ],
+            [
+                "024ed8a63e50052a"
+            ]
+        ]
+    },
+    {
+        "id": "6c9b7d9dd15c0dbe",
+        "type": "mongodb4",
+        "z": "35b964c2a4e7b812",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "notes",
+        "operation": "updateOne",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 590,
+        "y": 320,
+        "wires": [
+            [
+                "fd80ccf454914367"
+            ]
+        ]
+    },
+    {
+        "id": "fd80ccf454914367",
+        "type": "debug",
+        "z": "35b964c2a4e7b812",
+        "name": "/note/:id -> GüncellemeFiltre -> updateOne",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "024ed8a63e50052a",
+        "type": "http response",
+        "z": "35b964c2a4e7b812",
+        "name": "Hata",
+        "statusCode": "",
+        "headers": {},
+        "x": 510,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f5a6d64bd28aeed0",
+        "type": "function",
+        "z": "59b03ea7b921cbf5",
+        "name": "SenkronFiltre",
+        "func": "let notlar = msg.payload\n\n\nif (notlar.length == 0) {\n    msg.payload = [];\n    return [null, msg];\n}\n\nif (notlar.some(n => n == null || n._id == null)) {\n    msg.payload = { hata: \"Notlarda ID eksik\" };\n    return [null, msg];\n}\n\nmsg.kaydedilenler = notlar.map(n => n._id);\n\nmsg.payload = [ notlar.map(n => {\n    if (n.silindiMi === true) {\n        return { deleteOne: { filter: { _id: n._id } } };\n    }\n    return {\n        replaceOne: {\n            filter: { _id: n._id },\n            replacement: {\n                _id:              n._id,\n                baslik:           n.baslik,\n                aciklama:         n.aciklama || \"\",\n                oncelik:          n.oncelik || 2,\n                silindiMi:        false,\n                guncellemeTarihi: n.guncellemeTarihi || Date.now()\n            },\n            upsert: true\n        }\n    };\n}) ];\n\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "7784e75c6e79a6d9"
+            ],
+            [
+                "371429d301bae2ce"
+            ]
+        ]
+    },
+    {
+        "id": "7784e75c6e79a6d9",
+        "type": "mongodb4",
+        "z": "59b03ea7b921cbf5",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "notes",
+        "operation": "bulkWrite",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 500,
+        "y": 180,
+        "wires": [
+            [
+                "98797ca17da2e9f5"
+            ]
+        ]
+    },
+    {
+        "id": "98797ca17da2e9f5",
+        "type": "debug",
+        "z": "59b03ea7b921cbf5",
+        "name": "/notes/sync -> SenkronFiltre -> bulkWrite",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "371429d301bae2ce",
+        "type": "http response",
+        "z": "59b03ea7b921cbf5",
+        "name": "Hata",
+        "statusCode": "",
+        "headers": {},
+        "x": 430,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "836c7d56548a756c",
+        "type": "function",
+        "z": "6d6293de96db0c41",
+        "name": "500 cevabi",
+        "func": "node.warn(msg.error);\n\nmsg.statusCode = 500;\nmsg.payload = { hata: msg.error ? msg.error.message : \"bilinmeyen hata\" };\n\nif (!msg.res) {\n    return [null, msg];\n}\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [],
+            [
+                "d69feb0d3b2795ef"
+            ]
+        ]
+    },
+    {
+        "id": "d69feb0d3b2795ef",
+        "type": "debug",
+        "z": "6d6293de96db0c41",
+        "name": "HataLog",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "8a1d88796245a24a",
+        "type": "http in",
+        "z": "809d1653626c3638",
+        "name": "",
+        "url": "/notes",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 340,
+        "y": 160,
+        "wires": [
+            [
+                "fb15fc52b7d783a2"
+            ]
+        ]
+    },
+    {
+        "id": "6b99a19e87ccfd71",
+        "type": "http response",
+        "z": "809d1653626c3638",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "application/json; charset=utf-8"
+        },
+        "x": 1050,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "2d0effc6f9a423c4",
+        "type": "http in",
+        "z": "809d1653626c3638",
+        "name": "",
+        "url": "/note",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 340,
+        "y": 260,
+        "wires": [
+            [
+                "8f2632081b950dc5"
+            ]
+        ]
+    },
+    {
+        "id": "a5f7e069cd53cf1d",
+        "type": "http response",
+        "z": "809d1653626c3638",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "application/json; charset=utf-8"
+        },
+        "x": 1050,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "0200cbc3ddc4ce4f",
+        "type": "http in",
+        "z": "809d1653626c3638",
+        "name": "",
+        "url": "/note/:id",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 350,
+        "y": 340,
+        "wires": [
+            [
+                "f5c8b85d2ebc6210"
+            ]
+        ]
+    },
+    {
+        "id": "99406724899fc1c7",
+        "type": "http in",
+        "z": "809d1653626c3638",
+        "name": "",
+        "url": "/note/:id",
+        "method": "delete",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 360,
+        "y": 420,
+        "wires": [
+            [
+                "2b18a61d01332e64"
+            ]
+        ]
+    },
+    {
+        "id": "ddd0c52081d9f171",
+        "type": "http in",
+        "z": "809d1653626c3638",
+        "name": "",
+        "url": "/notes/sync",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 360,
+        "y": 500,
+        "wires": [
+            [
+                "5e6fb2543bbca3c6"
+            ]
+        ]
+    },
+    {
+        "id": "3a27435f6d05afbc",
+        "type": "inject",
+        "z": "809d1653626c3638",
+        "name": "her 2 dakika",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "120",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 540,
+        "y": 660,
+        "wires": [
+            [
+                "018b72b4cf71d658"
+            ]
+        ]
+    },
+    {
+        "id": "5a03d20493fcd773",
+        "type": "catch",
+        "z": "809d1653626c3638",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 340,
+        "y": 580,
+        "wires": [
+            [
+                "5f5ec119667c85bb"
+            ]
+        ]
+    },
+    {
+        "id": "4f8203e7e1737982",
+        "type": "http response",
+        "z": "809d1653626c3638",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "application/json; charset=utf-8"
+        },
+        "x": 1050,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "fb15fc52b7d783a2",
+        "type": "subflow:5cdcc70dcac84c81",
+        "z": "809d1653626c3638",
+        "name": "GetNote",
+        "x": 700,
+        "y": 160,
+        "wires": [
+            [
+                "6b99a19e87ccfd71"
+            ]
+        ]
+    },
+    {
+        "id": "8f2632081b950dc5",
+        "type": "subflow:cb699f4ac2c58699",
+        "z": "809d1653626c3638",
+        "name": "PostNote",
+        "x": 700,
+        "y": 260,
+        "wires": [
+            [
+                "a5f7e069cd53cf1d"
+            ]
+        ]
+    },
+    {
+        "id": "018b72b4cf71d658",
+        "type": "subflow:95fe5ff624152c3f",
+        "z": "809d1653626c3638",
+        "name": "Not Kontrol",
+        "x": 890,
         "y": 660,
         "wires": []
+    },
+    {
+        "id": "2b18a61d01332e64",
+        "type": "subflow:d82cc3adf5c288a2",
+        "z": "809d1653626c3638",
+        "name": "DeleteNote",
+        "x": 710,
+        "y": 420,
+        "wires": [
+            [
+                "2d9fb84d764044b3"
+            ]
+        ]
+    },
+    {
+        "id": "2d9fb84d764044b3",
+        "type": "http response",
+        "z": "809d1653626c3638",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1050,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "f5c8b85d2ebc6210",
+        "type": "subflow:35b964c2a4e7b812",
+        "z": "809d1653626c3638",
+        "name": "UpdateNote",
+        "x": 710,
+        "y": 340,
+        "wires": [
+            [
+                "cef98cb1559f40cd"
+            ]
+        ]
+    },
+    {
+        "id": "cef98cb1559f40cd",
+        "type": "http response",
+        "z": "809d1653626c3638",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1050,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "5e6fb2543bbca3c6",
+        "type": "subflow:59b03ea7b921cbf5",
+        "z": "809d1653626c3638",
+        "name": "SenkronNote",
+        "x": 710,
+        "y": 500,
+        "wires": [
+            [
+                "2d88301288c914d5"
+            ]
+        ]
+    },
+    {
+        "id": "2d88301288c914d5",
+        "type": "http response",
+        "z": "809d1653626c3638",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1050,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "5f5ec119667c85bb",
+        "type": "subflow:6d6293de96db0c41",
+        "z": "809d1653626c3638",
+        "name": "Loglama",
+        "x": 700,
+        "y": 580,
+        "wires": [
+            [
+                "4f8203e7e1737982"
+            ]
+        ]
     }
 ]
