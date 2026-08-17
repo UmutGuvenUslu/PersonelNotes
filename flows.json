@@ -2,7 +2,31 @@
     {
         "id": "809d1653626c3638",
         "type": "tab",
-        "label": "PersonelNodesBackend",
+        "label": "NoteService",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b0334dec5b227c98",
+        "type": "tab",
+        "label": "KategoriService",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4f06cfd721a0067d",
+        "type": "tab",
+        "label": "Panel",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cf3659ba771d5d60",
+        "type": "tab",
+        "label": "UserService",
         "disabled": false,
         "info": "",
         "env": []
@@ -105,8 +129,9 @@
     {
         "id": "5cdcc70dcac84c81",
         "type": "subflow",
-        "name": "Subflow 5",
+        "name": "GetNote",
         "info": "",
+        "category": "",
         "in": [
             {
                 "x": 60,
@@ -129,13 +154,17 @@
                     }
                 ]
             }
-        ]
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
     },
     {
         "id": "cb699f4ac2c58699",
         "type": "subflow",
-        "name": "Subflow 6",
+        "name": "PostNote",
         "info": "",
+        "category": "",
         "in": [
             {
                 "x": 60,
@@ -158,13 +187,17 @@
                     }
                 ]
             }
-        ]
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
     },
     {
         "id": "95fe5ff624152c3f",
         "type": "subflow",
-        "name": "Subflow 7",
+        "name": "Not Kontrol",
         "info": "",
+        "category": "",
         "in": [
             {
                 "x": 60,
@@ -176,13 +209,17 @@
                 ]
             }
         ],
-        "out": []
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
     },
     {
         "id": "d82cc3adf5c288a2",
         "type": "subflow",
-        "name": "Subflow 8",
+        "name": "DeleteNote",
         "info": "",
+        "category": "",
         "in": [
             {
                 "x": 60,
@@ -205,13 +242,17 @@
                     }
                 ]
             }
-        ]
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
     },
     {
         "id": "35b964c2a4e7b812",
         "type": "subflow",
-        "name": "Subflow 9",
+        "name": "UpdateNote",
         "info": "",
+        "category": "",
         "in": [
             {
                 "x": 120,
@@ -234,13 +275,17 @@
                     }
                 ]
             }
-        ]
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
     },
     {
         "id": "59b03ea7b921cbf5",
         "type": "subflow",
-        "name": "Subflow 10",
+        "name": "SenkronNote",
         "info": "",
+        "category": "",
         "in": [
             {
                 "x": 60,
@@ -263,13 +308,17 @@
                     }
                 ]
             }
-        ]
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
     },
     {
         "id": "6d6293de96db0c41",
         "type": "subflow",
-        "name": "Subflow 11",
+        "name": "KategoriLoglama",
         "info": "",
+        "category": "",
         "in": [
             {
                 "x": 60,
@@ -292,7 +341,221 @@
                     }
                 ]
             }
-        ]
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "8d32cb445752d947",
+        "type": "subflow",
+        "name": "NotCRUD",
+        "info": "",
+        "category": "",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "cd4d6937895bae9d",
+        "type": "subflow",
+        "name": "UpdateKategori",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 120,
+                "y": 320,
+                "wires": [
+                    {
+                        "id": "4f50b847a098266a"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 860,
+                "y": 320,
+                "wires": [
+                    {
+                        "id": "762c0652f97456c2",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "41519d6018526434",
+        "type": "subflow",
+        "name": "DeleteKategori",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "f40a08e9cb879306"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 740,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "0b48e24827690a03",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "1af856080a8e842c",
+        "type": "subflow",
+        "name": "PostKategori",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "44b9e46c2ac9dc4d"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 740,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "dd33e83fa05139e7",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "efa7cd3b3f841bdf",
+        "type": "subflow",
+        "name": "GetKategori",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "6509548e36f9bcda"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 500,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "6509548e36f9bcda",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "8d6ef5806aab97ef",
+        "type": "subflow",
+        "name": "KategoriCRUD",
+        "info": "",
+        "category": "",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "9aded7e507b9fa04",
+        "type": "subflow",
+        "name": "SenkronKategori",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "70e3f40c406a26be"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 740,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "e61b0d1d18156d1c",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "27aaa413225825af",
+        "type": "subflow",
+        "name": "Kategori Kontrol",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "7b33699fa112c4b6"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
     },
     {
         "id": "6400ad6cb5353ade",
@@ -675,7 +938,7 @@
         "type": "function",
         "z": "cb699f4ac2c58699",
         "name": "Not Normalizasyon",
-        "func": "let n = msg.payload;\n\nif (n == null || n._id== null  || n.baslik == null ) {\n    msg.payload = { hata: \"Id ve başlık bilgileri zorunludur.\" };\n    return [null, msg];\n}\n\nlet note = {\n    _id:              n._id,\n    baslik:           n.baslik,\n    aciklama:         n.aciklama || \"\",\n    oncelik:          n.oncelik || 2,\n    silindiMi:        n.silindiMi === true,\n    guncellemeTarihi: n.guncellemeTarihi || Date.now()\n};\n\nmsg.not = note;\n\n\n\nmsg.payload = [ \n    { _id: note._id }, \n    note, \n    { upsert: true } \n    ];\n\nreturn [msg, null];",
+        "func": "let n = msg.payload;\n\nif (n == null || n._id== null  || n.baslik == null ) {\n    msg.payload = { hata: \"Id ve başlık bilgileri zorunludur.\" };\n    return [null, msg];\n}\n\nlet note = {\n    _id:              n._id,\n    baslik:           n.baslik,\n    aciklama:         n.aciklama || \"\",\n    oncelik:          n.oncelik || 2,\n    silindiMi:        n.silindiMi === true,\n    kategoriId: n.kategoriId,\n    kategori: n.kategori,\n    guncellemeTarihi: n.guncellemeTarihi || Date.now()\n};\n\nmsg.not = note;\n\n\n\nmsg.payload = [ \n    { _id: note._id }, \n    note, \n    { upsert: true } \n    ];\n\nreturn [msg, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -894,7 +1157,7 @@
         "type": "function",
         "z": "35b964c2a4e7b812",
         "name": "GüncellemeFiltre",
-        "func": "const id = msg.req.params.id;\nconst n  = msg.payload || {};\n\nif (id == null) {\n    msg.payload = { hata: \"id zorunlu\" };\n    return [null, msg];\n}\n\nconst alanlar = {\n    baslik:           n.baslik,\n    aciklama:         n.aciklama || \"\",\n    oncelik:          n.oncelik || 2,\n    silindiMi:        n.silindiMi,\n    guncellemeTarihi: n.guncellemeTarihi\n};\n\n\nmsg.payload = [ \n    { _id: id }, \n    { $set: alanlar }, \n    { upsert: true } \n    ];\n\nreturn [msg, null];",
+        "func": "const id = msg.req.params.id;\nconst n  = msg.payload || {};\n\nif (id == null) {\n    msg.payload = { hata: \"id zorunlu\" };\n    return [null, msg];\n}\n\nconst alanlar = {\n    baslik:           n.baslik,\n    aciklama:         n.aciklama || \"\",\n    oncelik:          n.oncelik || 2,\n    silindiMi:        n.silindiMi,\n    kategoriId:       n.kategoriId,\n    kategori:         n.kategori,\n    guncellemeTarihi: n.guncellemeTarihi\n};\n\n\nmsg.payload = [ \n    { _id: id }, \n    { $set: alanlar }, \n    { upsert: true } \n    ];\n\nreturn [msg, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1036,7 +1299,7 @@
         "type": "function",
         "z": "6d6293de96db0c41",
         "name": "500 cevabi",
-        "func": "node.warn(msg.error);\n\nmsg.statusCode = 500;\nmsg.payload = { hata: msg.error ? msg.error.message : \"bilinmeyen hata\" };\n\nif (!msg.res) {\n    return [null, msg];\n}\nreturn [msg, null];",
+        "func": "msg.payload = { hata: msg.error ? msg.error.message : \"bilinmeyen hata\" };\n\nif (!msg.res) {\n    return [null, msg];\n}\nreturn [msg, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1072,15 +1335,15 @@
     {
         "id": "8a1d88796245a24a",
         "type": "http in",
-        "z": "809d1653626c3638",
+        "z": "8d32cb445752d947",
         "name": "",
         "url": "/notes",
         "method": "get",
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 340,
-        "y": 160,
+        "x": 200,
+        "y": 80,
         "wires": [
             [
                 "fb15fc52b7d783a2"
@@ -1090,27 +1353,27 @@
     {
         "id": "6b99a19e87ccfd71",
         "type": "http response",
-        "z": "809d1653626c3638",
+        "z": "8d32cb445752d947",
         "name": "",
         "statusCode": "",
         "headers": {
             "content-type": "application/json; charset=utf-8"
         },
-        "x": 1050,
-        "y": 160,
+        "x": 910,
+        "y": 80,
         "wires": []
     },
     {
         "id": "2d0effc6f9a423c4",
         "type": "http in",
-        "z": "809d1653626c3638",
+        "z": "8d32cb445752d947",
         "name": "",
         "url": "/note",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 340,
-        "y": 260,
+        "x": 200,
+        "y": 180,
         "wires": [
             [
                 "8f2632081b950dc5"
@@ -1120,27 +1383,27 @@
     {
         "id": "a5f7e069cd53cf1d",
         "type": "http response",
-        "z": "809d1653626c3638",
+        "z": "8d32cb445752d947",
         "name": "",
         "statusCode": "",
         "headers": {
             "content-type": "application/json; charset=utf-8"
         },
-        "x": 1050,
-        "y": 260,
+        "x": 910,
+        "y": 180,
         "wires": []
     },
     {
         "id": "0200cbc3ddc4ce4f",
         "type": "http in",
-        "z": "809d1653626c3638",
+        "z": "8d32cb445752d947",
         "name": "",
         "url": "/note/:id",
         "method": "put",
         "upload": false,
         "swaggerDoc": "",
-        "x": 350,
-        "y": 340,
+        "x": 210,
+        "y": 260,
         "wires": [
             [
                 "f5c8b85d2ebc6210"
@@ -1150,19 +1413,663 @@
     {
         "id": "99406724899fc1c7",
         "type": "http in",
-        "z": "809d1653626c3638",
+        "z": "8d32cb445752d947",
         "name": "",
         "url": "/note/:id",
         "method": "delete",
         "upload": false,
         "swaggerDoc": "",
-        "x": 360,
-        "y": 420,
+        "x": 220,
+        "y": 340,
         "wires": [
             [
                 "2b18a61d01332e64"
             ]
         ]
+    },
+    {
+        "id": "fb15fc52b7d783a2",
+        "type": "subflow:5cdcc70dcac84c81",
+        "z": "8d32cb445752d947",
+        "name": "",
+        "x": 560,
+        "y": 80,
+        "wires": [
+            [
+                "6b99a19e87ccfd71"
+            ]
+        ]
+    },
+    {
+        "id": "8f2632081b950dc5",
+        "type": "subflow:cb699f4ac2c58699",
+        "z": "8d32cb445752d947",
+        "name": "",
+        "x": 560,
+        "y": 180,
+        "wires": [
+            [
+                "a5f7e069cd53cf1d"
+            ]
+        ]
+    },
+    {
+        "id": "2b18a61d01332e64",
+        "type": "subflow:d82cc3adf5c288a2",
+        "z": "8d32cb445752d947",
+        "name": "",
+        "x": 570,
+        "y": 340,
+        "wires": [
+            [
+                "2d9fb84d764044b3"
+            ]
+        ]
+    },
+    {
+        "id": "2d9fb84d764044b3",
+        "type": "http response",
+        "z": "8d32cb445752d947",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 910,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "f5c8b85d2ebc6210",
+        "type": "subflow:35b964c2a4e7b812",
+        "z": "8d32cb445752d947",
+        "name": "",
+        "x": 570,
+        "y": 260,
+        "wires": [
+            [
+                "cef98cb1559f40cd"
+            ]
+        ]
+    },
+    {
+        "id": "cef98cb1559f40cd",
+        "type": "http response",
+        "z": "8d32cb445752d947",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 910,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "4f50b847a098266a",
+        "type": "function",
+        "z": "cd4d6937895bae9d",
+        "name": "GüncellemeFiltre",
+        "func": "const id = msg.req.params.id;\nconst n  = msg.payload || {};\n\nif (id == null) {\n    msg.payload = { hata: \"id zorunlu\" };\n    return [null, msg];\n}\n\nconst alanlar = {\n    isim:           n.isim,\n    silindiMi:        n.silindiMi,\n    guncellemeTarihi: n.guncellemeTarihi\n};\n\n\nmsg.payload = [ \n    { _id: id }, \n    { $set: alanlar }, \n    { upsert: true } \n    ];\n\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 320,
+        "wires": [
+            [
+                "762c0652f97456c2"
+            ],
+            [
+                "e129fe941407e91b"
+            ]
+        ]
+    },
+    {
+        "id": "762c0652f97456c2",
+        "type": "mongodb4",
+        "z": "cd4d6937895bae9d",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "kategoriler",
+        "operation": "updateOne",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 590,
+        "y": 320,
+        "wires": [
+            [
+                "d67af5f1bfb23437"
+            ]
+        ]
+    },
+    {
+        "id": "d67af5f1bfb23437",
+        "type": "debug",
+        "z": "cd4d6937895bae9d",
+        "name": "/kategori/:id -> GüncellemeFiltre -> updateOne",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "e129fe941407e91b",
+        "type": "http response",
+        "z": "cd4d6937895bae9d",
+        "name": "Hata",
+        "statusCode": "",
+        "headers": {},
+        "x": 510,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f40a08e9cb879306",
+        "type": "function",
+        "z": "41519d6018526434",
+        "name": "DeleteFiltre",
+        "func": "const id = msg.req.params.id;\n\nif (id == null) {\n    msg.payload = { hata: \"Lütfen id girişi yapınız.\" };\n    return [null, msg];\n}\n\nmsg.payload = [ { _id: id } ];\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 200,
+        "wires": [
+            [
+                "0b48e24827690a03"
+            ],
+            [
+                "ef0657dd4ce6de55"
+            ]
+        ]
+    },
+    {
+        "id": "0b48e24827690a03",
+        "type": "mongodb4",
+        "z": "41519d6018526434",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "kategoriler",
+        "operation": "deleteOne",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 450,
+        "y": 200,
+        "wires": [
+            [
+                "41a6aea19f648b6e"
+            ]
+        ]
+    },
+    {
+        "id": "41a6aea19f648b6e",
+        "type": "debug",
+        "z": "41519d6018526434",
+        "name": "/kategori/:id -> DeleteFiltre -> deleteOne",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ef0657dd4ce6de55",
+        "type": "http response",
+        "z": "41519d6018526434",
+        "name": "Hata",
+        "statusCode": "",
+        "headers": {},
+        "x": 290,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "44b9e46c2ac9dc4d",
+        "type": "function",
+        "z": "1af856080a8e842c",
+        "name": "Kategori Normalizasyon",
+        "func": "let n = msg.payload;\n\nif (n == null || n._id== null  || n.isim == null ) {\n    msg.payload = { hata: \"Id ve isim bilgileri zorunludur.\" };\n    return [null, msg];\n}\n\nlet kategori = {\n    _id:              n._id,\n    isim:           n.isim,\n    silindiMi:        n.silindiMi === true,\n    guncellemeTarihi: n.guncellemeTarihi || Date.now()\n};\n\nmsg.kategori = kategori;\n\n\n\nmsg.payload = [ \n    { _id: kategori._id }, \n    kategori, \n    { upsert: true } \n    ];\n\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 280,
+        "wires": [
+            [
+                "dd33e83fa05139e7"
+            ],
+            [
+                "fa0693a7afd47092"
+            ]
+        ]
+    },
+    {
+        "id": "dd33e83fa05139e7",
+        "type": "mongodb4",
+        "z": "1af856080a8e842c",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "kategoriler",
+        "operation": "replaceOne",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 490,
+        "y": 280,
+        "wires": [
+            [
+                "7286868a425f938a"
+            ]
+        ]
+    },
+    {
+        "id": "7286868a425f938a",
+        "type": "debug",
+        "z": "1af856080a8e842c",
+        "name": "POST /kategoriEkle-> mongo sonucu",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fa0693a7afd47092",
+        "type": "http response",
+        "z": "1af856080a8e842c",
+        "name": "Hata",
+        "statusCode": "",
+        "headers": {},
+        "x": 430,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "6509548e36f9bcda",
+        "type": "mongodb4",
+        "z": "efa7cd3b3f841bdf",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "kategoriler",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 270,
+        "y": 180,
+        "wires": [
+            [
+                "5da8385845424bc9"
+            ]
+        ]
+    },
+    {
+        "id": "5da8385845424bc9",
+        "type": "debug",
+        "z": "efa7cd3b3f841bdf",
+        "name": "/kategori-> Filtre -> find",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 300,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c8c2fd5cd68012a5",
+        "type": "http in",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "url": "/kategori",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 270,
+        "y": 180,
+        "wires": [
+            [
+                "0c88fcebe2ef3b18"
+            ]
+        ]
+    },
+    {
+        "id": "9b2f7408c22210bd",
+        "type": "http response",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "application/json; charset=utf-8"
+        },
+        "x": 960,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "da3013ab7a2503d6",
+        "type": "http in",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "url": "/kategoriEkle",
+        "method": "post",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 300,
+        "y": 280,
+        "wires": [
+            [
+                "af73a1521210ce76"
+            ]
+        ]
+    },
+    {
+        "id": "ed8a6a3725dc8ac2",
+        "type": "http response",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "application/json; charset=utf-8"
+        },
+        "x": 960,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "afd99b9295179c2d",
+        "type": "http in",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "url": "/kategoriDuzenle/:id",
+        "method": "put",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 310,
+        "y": 360,
+        "wires": [
+            [
+                "c6e03c920a1cee9d"
+            ]
+        ]
+    },
+    {
+        "id": "c8b1bb251676fa74",
+        "type": "http in",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "url": "/kategori/:id",
+        "method": "delete",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 290,
+        "y": 440,
+        "wires": [
+            [
+                "79f9c1ccea712ec5"
+            ]
+        ]
+    },
+    {
+        "id": "0c88fcebe2ef3b18",
+        "type": "subflow:efa7cd3b3f841bdf",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "x": 610,
+        "y": 180,
+        "wires": [
+            [
+                "9b2f7408c22210bd"
+            ]
+        ]
+    },
+    {
+        "id": "af73a1521210ce76",
+        "type": "subflow:1af856080a8e842c",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "x": 630,
+        "y": 280,
+        "wires": [
+            [
+                "ed8a6a3725dc8ac2"
+            ]
+        ]
+    },
+    {
+        "id": "79f9c1ccea712ec5",
+        "type": "subflow:41519d6018526434",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "x": 640,
+        "y": 440,
+        "wires": [
+            [
+                "2c621a8f65011811"
+            ]
+        ]
+    },
+    {
+        "id": "2c621a8f65011811",
+        "type": "http response",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 960,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c6e03c920a1cee9d",
+        "type": "subflow:cd4d6937895bae9d",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "x": 640,
+        "y": 360,
+        "wires": [
+            [
+                "719867e1aabfb990"
+            ]
+        ]
+    },
+    {
+        "id": "719867e1aabfb990",
+        "type": "http response",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 960,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "70e3f40c406a26be",
+        "type": "function",
+        "z": "9aded7e507b9fa04",
+        "name": "SenkronFiltre",
+        "func": "let kategoriler = msg.payload\n\n\nif (kategoriler.length == 0) {\n    msg.payload = [];\n    return [null, msg];\n}\n\nif (kategoriler.some(n => n == null || n._id == null)) {\n    msg.payload = { hata: \"Kategorilerde ID eksik\" };\n    return [null, msg];\n}\n\nmsg.kaydedilenler = kategoriler.map(n => n._id);\n\nmsg.payload = [kategoriler.map(n => {\n    if (n.silindiMi === true) {\n        return { deleteOne: { filter: { _id: n._id } } };\n    }\n    return {\n        replaceOne: {\n            filter: { _id: n._id },\n            replacement: {\n                _id:              n._id,\n                isim:           n.isim,\n                silindiMi:        false,\n                guncellemeTarihi: n.guncellemeTarihi || Date.now()\n            },\n            upsert: true\n        }\n    };\n}) ];\n\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "e61b0d1d18156d1c"
+            ],
+            [
+                "b718cdfb707abc11"
+            ]
+        ]
+    },
+    {
+        "id": "e61b0d1d18156d1c",
+        "type": "mongodb4",
+        "z": "9aded7e507b9fa04",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "kategoriler",
+        "operation": "bulkWrite",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 500,
+        "y": 180,
+        "wires": [
+            [
+                "fb6d5ceaf0cc83e0"
+            ]
+        ]
+    },
+    {
+        "id": "fb6d5ceaf0cc83e0",
+        "type": "debug",
+        "z": "9aded7e507b9fa04",
+        "name": "/kategori/sync -> SenkronFiltre -> bulkWrite",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "b718cdfb707abc11",
+        "type": "http response",
+        "z": "9aded7e507b9fa04",
+        "name": "Hata",
+        "statusCode": "",
+        "headers": {},
+        "x": 430,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "7b33699fa112c4b6",
+        "type": "function",
+        "z": "27aaa413225825af",
+        "name": "Kontrol",
+        "func": "msg.payload = [ { silindiMi: false } ];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "1b9b22e12f6c353c"
+            ]
+        ]
+    },
+    {
+        "id": "1b9b22e12f6c353c",
+        "type": "mongodb4",
+        "z": "27aaa413225825af",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "kategoriler",
+        "operation": "countDocuments",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 430,
+        "y": 80,
+        "wires": [
+            [
+                "6501bad60dce43b5"
+            ]
+        ]
+    },
+    {
+        "id": "6501bad60dce43b5",
+        "type": "function",
+        "z": "27aaa413225825af",
+        "name": "Log",
+        "func": "msg.payload = \"Arka plan kontrol: \" + msg.payload + \" aktif kategori\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 80,
+        "wires": [
+            [
+                "cb500dd9052f6ed2"
+            ]
+        ]
+    },
+    {
+        "id": "cb500dd9052f6ed2",
+        "type": "debug",
+        "z": "27aaa413225825af",
+        "name": "ArkaPlanLog",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 80,
+        "wires": []
     },
     {
         "id": "ddd0c52081d9f171",
@@ -1173,8 +2080,8 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 360,
-        "y": 500,
+        "x": 340,
+        "y": 280,
         "wires": [
             [
                 "5e6fb2543bbca3c6"
@@ -1198,8 +2105,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 540,
-        "y": 660,
+        "x": 500,
+        "y": 440,
         "wires": [
             [
                 "018b72b4cf71d658"
@@ -1213,8 +2120,8 @@
         "name": "",
         "scope": null,
         "uncaught": false,
-        "x": 340,
-        "y": 580,
+        "x": 320,
+        "y": 360,
         "wires": [
             [
                 "5f5ec119667c85bb"
@@ -1230,100 +2137,26 @@
         "headers": {
             "content-type": "application/json; charset=utf-8"
         },
-        "x": 1050,
-        "y": 580,
+        "x": 1030,
+        "y": 360,
         "wires": []
-    },
-    {
-        "id": "fb15fc52b7d783a2",
-        "type": "subflow:5cdcc70dcac84c81",
-        "z": "809d1653626c3638",
-        "name": "GetNote",
-        "x": 700,
-        "y": 160,
-        "wires": [
-            [
-                "6b99a19e87ccfd71"
-            ]
-        ]
-    },
-    {
-        "id": "8f2632081b950dc5",
-        "type": "subflow:cb699f4ac2c58699",
-        "z": "809d1653626c3638",
-        "name": "PostNote",
-        "x": 700,
-        "y": 260,
-        "wires": [
-            [
-                "a5f7e069cd53cf1d"
-            ]
-        ]
     },
     {
         "id": "018b72b4cf71d658",
         "type": "subflow:95fe5ff624152c3f",
         "z": "809d1653626c3638",
-        "name": "Not Kontrol",
-        "x": 890,
-        "y": 660,
-        "wires": []
-    },
-    {
-        "id": "2b18a61d01332e64",
-        "type": "subflow:d82cc3adf5c288a2",
-        "z": "809d1653626c3638",
-        "name": "DeleteNote",
-        "x": 710,
-        "y": 420,
-        "wires": [
-            [
-                "2d9fb84d764044b3"
-            ]
-        ]
-    },
-    {
-        "id": "2d9fb84d764044b3",
-        "type": "http response",
-        "z": "809d1653626c3638",
         "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1050,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "f5c8b85d2ebc6210",
-        "type": "subflow:35b964c2a4e7b812",
-        "z": "809d1653626c3638",
-        "name": "UpdateNote",
-        "x": 710,
-        "y": 340,
-        "wires": [
-            [
-                "cef98cb1559f40cd"
-            ]
-        ]
-    },
-    {
-        "id": "cef98cb1559f40cd",
-        "type": "http response",
-        "z": "809d1653626c3638",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 1050,
-        "y": 340,
+        "x": 870,
+        "y": 440,
         "wires": []
     },
     {
         "id": "5e6fb2543bbca3c6",
         "type": "subflow:59b03ea7b921cbf5",
         "z": "809d1653626c3638",
-        "name": "SenkronNote",
-        "x": 710,
-        "y": 500,
+        "name": "",
+        "x": 690,
+        "y": 280,
         "wires": [
             [
                 "2d88301288c914d5"
@@ -1337,8 +2170,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1050,
-        "y": 500,
+        "x": 1030,
+        "y": 280,
         "wires": []
     },
     {
@@ -1346,12 +2179,154 @@
         "type": "subflow:6d6293de96db0c41",
         "z": "809d1653626c3638",
         "name": "Loglama",
-        "x": 700,
-        "y": 580,
+        "x": 680,
+        "y": 360,
         "wires": [
             [
                 "4f8203e7e1737982"
             ]
         ]
+    },
+    {
+        "id": "452fa3a9a7ca6bfc",
+        "type": "subflow:8d32cb445752d947",
+        "z": "809d1653626c3638",
+        "name": "",
+        "x": 680,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "e74bfa874052050b",
+        "type": "http in",
+        "z": "b0334dec5b227c98",
+        "name": "",
+        "url": "/kategori/sync",
+        "method": "post",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 330,
+        "y": 360,
+        "wires": [
+            [
+                "08b6e5fbe807df12"
+            ]
+        ]
+    },
+    {
+        "id": "1e18cfc2e426b2b2",
+        "type": "inject",
+        "z": "b0334dec5b227c98",
+        "name": "her 2 dakika",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "120",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 500,
+        "y": 440,
+        "wires": [
+            [
+                "b7e09e3f95c4bbc5"
+            ]
+        ]
+    },
+    {
+        "id": "b7e09e3f95c4bbc5",
+        "type": "subflow:27aaa413225825af",
+        "z": "b0334dec5b227c98",
+        "name": "",
+        "x": 880,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "08b6e5fbe807df12",
+        "type": "subflow:9aded7e507b9fa04",
+        "z": "b0334dec5b227c98",
+        "name": "",
+        "x": 690,
+        "y": 360,
+        "wires": [
+            [
+                "812092acd50271a1"
+            ]
+        ]
+    },
+    {
+        "id": "812092acd50271a1",
+        "type": "http response",
+        "z": "b0334dec5b227c98",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1010,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "e6f7a886a6c0efdd",
+        "type": "subflow:8d6ef5806aab97ef",
+        "z": "b0334dec5b227c98",
+        "name": "",
+        "x": 660,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "85e4a2038b772afc",
+        "type": "http in",
+        "z": "4f06cfd721a0067d",
+        "name": "",
+        "url": "/panel",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 420,
+        "y": 340,
+        "wires": [
+            [
+                "4bb3d10e3b79c249"
+            ]
+        ]
+    },
+    {
+        "id": "4bb3d10e3b79c249",
+        "type": "template",
+        "z": "4f06cfd721a0067d",
+        "name": "WebSite-Anasayfa",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html lang=\"tr\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Not ve Kategori Paneli</title>\n  <style>\n    * {\n      box-sizing: border-box;\n      margin: 0;\n      padding: 0;\n      font-family: Arial, Helvetica, sans-serif;\n      font-size: 13px;\n    }\n\n    body {\n      background: #eee;\n      color: #222;\n      padding: 15px;\n    }\n\n    .app-container {\n      max-width: 1050px;\n      margin: 0 auto;\n      background: #fff;\n      border: 1px solid #ccc;\n      display: flex;\n      min-height: 600px;\n    }\n\n    /* Sol Panel */\n    .sidebar {\n      width: 260px;\n      border-right: 1px solid #ccc;\n      background: #f7f7f7;\n      padding: 15px;\n      display: flex;\n      flex-direction: column;\n      gap: 12px;\n    }\n\n    /* Sağ Panel */\n    .main-content {\n      flex: 1;\n      padding: 15px;\n      display: flex;\n      flex-direction: column;\n      gap: 15px;\n    }\n\n    .section-title {\n      font-size: 14px;\n      font-weight: bold;\n      padding-bottom: 6px;\n      border-bottom: 1px solid #ddd;\n      color: #333;\n    }\n\n    .panel-box {\n      border: 1px solid #ddd;\n      background: #fafafa;\n      padding: 10px;\n    }\n\n    .form-group {\n      margin-bottom: 8px;\n    }\n\n    .form-group label {\n      display: block;\n      margin-bottom: 3px;\n      font-weight: bold;\n      color: #444;\n    }\n\n    input[type=\"text\"], select, textarea {\n      width: 100%;\n      border: 1px solid #aaa;\n      padding: 5px 6px;\n      background: #fff;\n      color: #000;\n    }\n\n    input:focus, select:focus, textarea:focus {\n      border-color: #555;\n      outline: none;\n    }\n\n    button {\n      padding: 5px 10px;\n      background: #e1e1e1;\n      border: 1px solid #adadad;\n      color: #000;\n      cursor: pointer;\n    }\n\n    button:hover {\n      background: #d4d4d4;\n      border-color: #888;\n    }\n\n    .btn-small {\n      padding: 2px 6px;\n      font-size: 11px;\n    }\n\n    .btn-danger {\n      color: #900;\n    }\n\n    .cat-list {\n      list-style: none;\n      border: 1px solid #ddd;\n      background: #fff;\n      flex: 1;\n      overflow-y: auto;\n    }\n\n    .cat-item {\n      padding: 7px 10px;\n      border-bottom: 1px solid #eee;\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      cursor: pointer;\n    }\n\n    .cat-item:hover {\n      background: #f0f0f0;\n    }\n\n    .cat-item.active {\n      background: #d9e6f2;\n      font-weight: bold;\n    }\n\n    .notes-list {\n      display: flex;\n      flex-direction: column;\n      gap: 10px;\n    }\n\n    .note-row {\n      border: 1px solid #ccc;\n      background: #fff;\n      padding: 10px;\n    }\n\n    .note-top {\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      background: #f4f4f4;\n      padding: 4px 8px;\n      border-bottom: 1px solid #e5e5e5;\n      margin: -10px -10px 8px -10px;\n    }\n\n    .note-badge {\n      font-size: 11px;\n      background: #e2e2e2;\n      border: 1px solid #ccc;\n      padding: 1px 5px;\n    }\n\n    .note-meta {\n      font-size: 11px;\n      color: #666;\n      margin-top: 6px;\n    }\n\n    .note-text {\n      color: #333;\n      line-height: 1.4;\n      white-space: pre-wrap;\n    }\n\n    .note-bottom {\n      margin-top: 8px;\n      text-align: right;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"app-container\">\n    \n    <!-- SOL: KATEGORİ PANELİ -->\n    <div class=\"sidebar\">\n      <div class=\"section-title\">Kategoriler</div>\n\n      <div class=\"panel-box\">\n        <input type=\"hidden\" id=\"editCatId\">\n        <div class=\"form-group\">\n          <input type=\"text\" id=\"catNameInput\" placeholder=\"Kategori Adı\">\n        </div>\n        <div style=\"display: flex; gap: 4px;\">\n          <button id=\"saveCatBtn\" onclick=\"saveCategory()\">Ekle</button>\n          <button id=\"cancelCatBtn\" style=\"display:none;\" onclick=\"resetCategoryForm()\">İptal</button>\n        </div>\n      </div>\n\n      <ul class=\"cat-list\" id=\"catList\"></ul>\n    </div>\n\n    <!-- SAĞ: NOT PANELİ -->\n    <div class=\"main-content\">\n      \n      <!-- Not Form Alanı -->\n      <div class=\"panel-box\">\n        <div class=\"section-title\" style=\"margin-bottom: 8px;\" id=\"noteFormHeader\">Not Girişi</div>\n        <input type=\"hidden\" id=\"editNoteId\">\n        \n        <div style=\"display: flex; gap: 10px; margin-bottom: 8px;\">\n          <div style=\"flex: 2;\">\n            <label>Başlık (*):</label>\n            <input type=\"text\" id=\"noteTitleInput\">\n          </div>\n          <div style=\"flex: 1;\">\n            <label>Kategori:</label>\n            <select id=\"noteCatSelect\"></select>\n          </div>\n          <div style=\"flex: 1;\">\n            <label>Öncelik:</label>\n            <select id=\"notePrioritySelect\">\n              <option value=\"1\">1 - Düşük</option>\n              <option value=\"2\" selected>2 - Normal</option>\n              <option value=\"3\">3 - Yüksek</option>\n            </select>\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n          <label>Açıklama:</label>\n          <textarea id=\"noteContentInput\" rows=\"3\"></textarea>\n        </div>\n\n        <div style=\"display: flex; gap: 6px;\">\n          <button id=\"saveNoteBtn\" onclick=\"saveNote()\">Notu Kaydet</button>\n          <button id=\"cancelNoteBtn\" style=\"display:none;\" onclick=\"resetNoteForm()\">İptal</button>\n        </div>\n      </div>\n\n      <!-- Not Liste Alanı -->\n      <div>\n        <div class=\"section-title\" style=\"display: flex; justify-content: space-between;\">\n          <span id=\"currentViewText\">Kayıtlı Notlar</span>\n        </div>\n\n        <div class=\"notes-list\" id=\"notesContainer\" style=\"margin-top: 10px;\"></div>\n      </div>\n\n    </div>\n\n  </div>\n\n  <script>\n    const currentHost = window.location.hostname || '127.0.0.1';\n    const API_BASE = `http://${currentHost}:1880`;\n\n    let categories = [];\n    let notes = [];\n    let selectedFilter = 'all';\n\n    // --- KATEGORİ API İŞLEMLERİ ---\n\n    // GET /kategori\n    async function fetchCategories() {\n      try {\n        const res = await fetch(`${API_BASE}/kategori`);\n        if (res.ok) {\n          const data = await res.json();\n          categories = Array.isArray(data) ? data.filter(c => !c.silindiMi) : [];\n          render();\n        }\n      } catch (err) {\n        console.error(\"Kategoriler alınamadı:\", err);\n      }\n    }\n\n    // POST /kategoriEkle & PUT /kategoriDuzenle/:id\n    async function saveCategory() {\n      const isim = document.getElementById('catNameInput').value.trim();\n      const editId = document.getElementById('editCatId').value;\n\n      if (!isim) {\n        alert('Kategori ismi boş bırakılamaz.');\n        return;\n      }\n\n      // Kotlin data class Kategori yapısı\n      const payload = {\n        _id: editId || Date.now().toString(),\n        isim: isim,\n        senkronMu: false,\n        silindiMi: false,\n        sunucudaVarMi: false,\n        guncellemeTarihi: Date.now()\n      };\n\n      try {\n        let res;\n        if (editId) {\n          res = await fetch(`${API_BASE}/kategoriDuzenle/${editId}`, {\n            method: 'PUT',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(payload)\n          });\n        } else {\n          res = await fetch(`${API_BASE}/kategoriEkle`, {\n            method: 'POST',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(payload)\n          });\n        }\n\n        if (res.ok) {\n          resetCategoryForm();\n          await fetchCategories();\n        } else {\n          const err = await res.json();\n          alert('Hata: ' + (err.hata || 'Kategori kaydedilemedi.'));\n        }\n      } catch (err) {\n        console.error(\"Kategori kaydetme hatası:\", err);\n      }\n    }\n\n    // DELETE /kategori/:id\n    async function deleteCategory(id, e) {\n      e.stopPropagation();\n      if (!confirm('Bu kategoriyi silmek istiyor musunuz?')) return;\n\n      try {\n        const res = await fetch(`${API_BASE}/kategori/${id}`, {\n          method: 'DELETE'\n        });\n        if (res.ok) {\n          if (selectedFilter === id) selectedFilter = 'all';\n          await fetchCategories();\n        }\n      } catch (err) {\n        console.error(\"Kategori silme hatası:\", err);\n      }\n    }\n\n    // --- NOT API İŞLEMLERİ ---\n\n    // GET /notes\n    async function fetchNotes() {\n      try {\n        const res = await fetch(`${API_BASE}/notes`);\n        if (res.ok) {\n          const data = await res.json();\n          notes = Array.isArray(data) ? data.filter(n => !n.silindiMi) : [];\n          render();\n        }\n      } catch (err) {\n        console.error(\"Notlar alınamadı:\", err);\n      }\n    }\n\n    // POST /note & PUT /note/:id\n    async function saveNote() {\n      const baslik = document.getElementById('noteTitleInput').value.trim();\n      const selectedCatId = document.getElementById('noteCatSelect').value;\n      const aciklama = document.getElementById('noteContentInput').value.trim();\n      const oncelik = parseInt(document.getElementById('notePrioritySelect').value, 10);\n      const editId = document.getElementById('editNoteId').value;\n\n      if (!baslik) {\n        alert('Başlık alanı zorunludur.');\n        return;\n      }\n\n      // Seçilen kategorinin nesnesini bulup ismini string olarak alıyoruz\n      const selectedCatObj = categories.find(c => c._id === selectedCatId);\n\n      const payload = {\n        _id: editId || Date.now().toString(),\n        baslik: baslik,\n        aciklama: aciklama || \"\",\n        oncelik: oncelik || 2,\n        silindiMi: false,\n        kategoriId: selectedCatId || null,\n        kategori: selectedCatObj ? selectedCatObj.isim : \"\",\n        guncellemeTarihi: Date.now()\n      };\n\n      try {\n        let res;\n        if (editId) {\n          res = await fetch(`${API_BASE}/note/${editId}`, {\n            method: 'PUT',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(payload)\n          });\n        } else {\n          res = await fetch(`${API_BASE}/note`, {\n            method: 'POST',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(payload)\n          });\n        }\n\n        if (res.ok) {\n          resetNoteForm();\n          await fetchNotes();\n        } else {\n          const err = await res.json();\n          alert('Hata: ' + (err.hata || 'Not kaydedilemedi.'));\n        }\n      } catch (err) {\n        console.error(\"Not kaydetme hatası:\", err);\n      }\n    }\n\n    // DELETE /note/:id\n    async function deleteNote(id) {\n      if (!confirm('Bu notu silmek istiyor musunuz?')) return;\n\n      try {\n        const res = await fetch(`${API_BASE}/note/${id}`, {\n          method: 'DELETE'\n        });\n        if (res.ok) {\n          await fetchNotes();\n        }\n      } catch (err) {\n        console.error(\"Not silme hatası:\", err);\n      }\n    }\n\n    // --- FORM YÖNETİMİ & RENDER ---\n    function editCategory(id, e) {\n      e.stopPropagation();\n      const cat = categories.find(c => c._id === id);\n      if (!cat) return;\n\n      document.getElementById('editCatId').value = cat._id;\n      document.getElementById('catNameInput').value = cat.isim || '';\n      document.getElementById('saveCatBtn').textContent = 'Güncelle';\n      document.getElementById('cancelCatBtn').style.display = 'inline-block';\n    }\n\n    function resetCategoryForm() {\n      document.getElementById('editCatId').value = '';\n      document.getElementById('catNameInput').value = '';\n      document.getElementById('saveCatBtn').textContent = 'Ekle';\n      document.getElementById('cancelCatBtn').style.display = 'none';\n    }\n\n    function editNote(id) {\n      const note = notes.find(n => n._id === id);\n      if (!note) return;\n\n      document.getElementById('editNoteId').value = note._id;\n      document.getElementById('noteTitleInput').value = note.baslik || '';\n      document.getElementById('noteCatSelect').value = note.kategoriId || '';\n      document.getElementById('notePrioritySelect').value = note.oncelik || 2;\n      document.getElementById('noteContentInput').value = note.aciklama || '';\n\n      document.getElementById('noteFormHeader').textContent = 'Notu Düzenle';\n      document.getElementById('saveNoteBtn').textContent = 'Güncelle';\n      document.getElementById('cancelNoteBtn').style.display = 'inline-block';\n    }\n\n    function resetNoteForm() {\n      document.getElementById('editNoteId').value = '';\n      document.getElementById('noteTitleInput').value = '';\n      document.getElementById('noteCatSelect').value = '';\n      document.getElementById('notePrioritySelect').value = '2';\n      document.getElementById('noteContentInput').value = '';\n\n      document.getElementById('noteFormHeader').textContent = 'Not Girişi';\n      document.getElementById('saveNoteBtn').textContent = 'Notu Kaydet';\n      document.getElementById('cancelNoteBtn').style.display = 'none';\n    }\n\n    function renderCategories() {\n      const list = document.getElementById('catList');\n      const select = document.getElementById('noteCatSelect');\n      list.innerHTML = '';\n      select.innerHTML = '<option value=\"\">-- Kategori Seçiniz --</option>';\n\n      // Tümü sekmesi\n      const allLi = document.createElement('li');\n      allLi.className = `cat-item ${selectedFilter === 'all' ? 'active' : ''}`;\n      allLi.innerHTML = `<span>Tümü (${notes.length})</span>`;\n      allLi.onclick = () => { selectedFilter = 'all'; render(); };\n      list.appendChild(allLi);\n\n      categories.forEach(cat => {\n        // Notları kategoriId ile eşleştirip saydırıyoruz\n        const count = notes.filter(n => n.kategoriId === cat._id).length;\n        const li = document.createElement('li');\n        li.className = `cat-item ${selectedFilter === cat._id ? 'active' : ''}`;\n        li.innerHTML = `\n          <span style=\"flex:1;\">${cat.isim} (${count})</span>\n          <div style=\"display: flex; gap: 3px;\">\n            <button class=\"btn-small\" onclick=\"editCategory('${cat._id}', event)\">Düzenle</button>\n            <button class=\"btn-small btn-danger\" onclick=\"deleteCategory('${cat._id}', event)\">Sil</button>\n          </div>\n        `;\n        li.onclick = (e) => {\n          if (e.target.tagName !== 'BUTTON') {\n            selectedFilter = cat._id;\n            render();\n          }\n        };\n        list.appendChild(li);\n\n        const opt = document.createElement('option');\n        opt.value = cat._id;\n        opt.textContent = cat.isim;\n        select.appendChild(opt);\n      });\n    }\n\n    function renderNotes() {\n      const container = document.getElementById('notesContainer');\n      const headerText = document.getElementById('currentViewText');\n      container.innerHTML = '';\n\n      const filtered = selectedFilter === 'all' \n        ? notes \n        : notes.filter(n => n.kategoriId === selectedFilter);\n\n      const activeCat = categories.find(c => c._id === selectedFilter);\n      headerText.textContent = activeCat ? `Kayıtlı Notlar (${activeCat.isim})` : 'Kayıtlı Notlar (Tümü)';\n\n      if (filtered.length === 0) {\n        container.innerHTML = '<div style=\"color: #777; padding: 10px; border: 1px dashed #ccc;\">Gösterilecek not bulunmuyor.</div>';\n        return;\n      }\n\n      filtered.forEach(note => {\n        // İsmi doğrudan payload'daki kategori alanından, yoksa kategoriler listesinden al\n        const cat = categories.find(c => c._id === note.kategoriId);\n        const categoryDisplayName = note.kategori || (cat ? cat.isim : 'Kategorisiz');\n        const dateStr = note.guncellemeTarihi ? new Date(note.guncellemeTarihi).toLocaleString('tr-TR') : '-';\n        \n        const el = document.createElement('div');\n        el.className = 'note-row';\n        el.innerHTML = `\n          <div class=\"note-top\">\n            <strong>${note.baslik}</strong>\n            <div>\n              <span class=\"note-badge\">Öncelik: ${note.oncelik || 2}</span>\n              <span class=\"note-badge\">${categoryDisplayName}</span>\n            </div>\n          </div>\n          <div class=\"note-text\">${note.aciklama || ''}</div>\n          <div class=\"note-meta\">Son Güncelleme: ${dateStr}</div>\n          <div class=\"note-bottom\">\n            <button class=\"btn-small\" onclick=\"editNote('${note._id}')\">Düzenle</button>\n            <button class=\"btn-small btn-danger\" onclick=\"deleteNote('${note._id}')\">Sil</button>\n          </div>\n        `;\n        container.appendChild(el);\n      });\n    }\n\n    function render() {\n      renderCategories();\n      renderNotes();\n    }\n\n    async function init() {\n      await fetchCategories();\n      await fetchNotes();\n    }\n\n    init();\n  </script>\n</body>\n</html>",
+        "output": "str",
+        "x": 670,
+        "y": 340,
+        "wires": [
+            [
+                "5d97bd190ce25eae"
+            ]
+        ]
+    },
+    {
+        "id": "5d97bd190ce25eae",
+        "type": "http response",
+        "z": "4f06cfd721a0067d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 890,
+        "y": 340,
+        "wires": []
     }
 ]
