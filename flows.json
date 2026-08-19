@@ -32,6 +32,14 @@
         "env": []
     },
     {
+        "id": "7ac945370c3f7079",
+        "type": "tab",
+        "label": "AuthService",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "1c407d057fc67ad1",
         "type": "subflow",
         "name": "Subflow 1",
@@ -624,7 +632,7 @@
                 "y": 280,
                 "wires": [
                     {
-                        "id": "4e78c656cd95df3d"
+                        "id": "aa11000000000007"
                     }
                 ]
             }
@@ -788,6 +796,159 @@
         "env": [],
         "meta": {},
         "color": "#DDAA99"
+    },
+    {
+        "id": "c9c1757596cdb4ff",
+        "type": "subflow",
+        "name": "GirişYap",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "742b7f0e9bad065d"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 640,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "9d1b614c60ea4538",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "a2ca8e0f1a28cb97",
+        "type": "subflow",
+        "name": "TokenDoğrulama",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "4b9ae7248dbe02a5"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 360,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "4b9ae7248dbe02a5",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "93a0de60e9c91ce6",
+        "type": "subflow",
+        "name": "AdminKontrol",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "177253852f7f1423"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 340,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "177253852f7f1423",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "84254be51afc5726",
+        "type": "subflow",
+        "name": "KayıtOl",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 80,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "caf74d261ad35dcb"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 600,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "a75b7ac7276664d2",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "34242816a322e249",
+        "type": "group",
+        "z": "7ac945370c3f7079",
+        "name": "Auth İslemleri için Token Ve Rol kontrol Subflowları",
+        "style": {
+            "stroke": "#ffffff",
+            "label": true,
+            "fill": "#ffC000",
+            "color": "#000000",
+            "label-position": "n"
+        },
+        "nodes": [
+            "8bae3586f32af285",
+            "c9fc0cccced5cc76"
+        ],
+        "x": 434,
+        "y": 199,
+        "w": 452,
+        "h": 82
     },
     {
         "id": "6400ad6cb5353ade",
@@ -1170,7 +1331,7 @@
         "type": "function",
         "z": "5cdcc70dcac84c81",
         "name": "NotPagination",
-        "func": "const limit = 10;\nconst ilkSayfa = msg.req?.query?.page ?? msg.payload?.page;\nconst sayfa = Math.max(1, parseInt(ilkSayfa, 10) || 1);\nconst atlanan = (sayfa - 1) * limit;\n\nmsg.limit = limit;\nmsg.skip = atlanan;\nmsg.payload = [\n    {},\n    { limit: limit, skip: atlanan, sort: { _id: -1 } }\n];\n\nreturn msg;",
+        "func": "const limit = 10;\nconst ilkSayfa = msg.req?.query?.sayfa ?? msg.req?.query?.page ?? msg.payload?.page;\nconst sayfa = Math.max(1, parseInt(ilkSayfa, 10) || 1);\nconst atlanan = (sayfa - 1) * limit;\n\nlet filtre = { silindiMi: false };\nif (!msg.adminMi) {\n    filtre.kullaniciId = msg.kullaniciId;  \n}\n\nconst istenenKullanici = msg.req?.query?.kullaniciId;\nif (msg.adminMi && istenenKullanici && istenenKullanici !== 'all') {\n    filtre.kullaniciId = istenenKullanici;\n}\nconst istenenKategori = msg.req?.query?.kategoriId;\nif (istenenKategori && istenenKategori !== 'all') {\n    filtre.kategoriId = istenenKategori;\n}\n\nmsg.payload = [ filtre, { limit: limit, skip: atlanan, sort: { guncellemeTarihi: -1 } } ];\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1190,7 +1351,7 @@
         "type": "function",
         "z": "cb699f4ac2c58699",
         "name": "Not Normalizasyon",
-        "func": "let n = msg.payload;\n\nif (n == null || n._id== null  || n.baslik == null ) {\n    msg.payload = { hata: \"Id ve başlık bilgileri zorunludur.\" };\n    return [null, msg];\n}\n\nlet note = {\n    _id:              n._id,\n    baslik:           n.baslik,\n    aciklama:         n.aciklama || \"\",\n    oncelik:          n.oncelik || 2,\n    silindiMi:        n.silindiMi === true,\n    kategoriId: n.kategoriId || n.kategori || \"\",\n    kullaniciId: n.kullaniciId || n.kullanici || \"\",\n    guncellemeTarihi: n.guncellemeTarihi || Date.now()\n};\n\n\nmsg.not = note;\n\n\n\nmsg.payload = [ \n    { _id: note._id }, \n    note, \n    { upsert: true } \n    ];\n\nreturn [msg, null];",
+        "func": "let n = msg.payload;\n\nif (n == null || n._id== null  || n.baslik == null ) {\n    msg.payload = { hata: \"Id ve başlık bilgileri zorunludur.\" };\n    return [null, msg];\n}\n\nlet atanan = msg.kullaniciId;\n\nif (msg.adminMi && n.kullaniciId) {\n    atanan = n.kullaniciId;\n}\n\nlet note = {\n    _id:              n._id,\n    baslik:           n.baslik,\n    aciklama:         n.aciklama || \"\",\n    oncelik:          n.oncelik || 2,\n    silindiMi:        n.silindiMi === true,\n    kategoriId: n.kategoriId || n.kategori || \"\",\n    kullaniciId: atanan,\n    guncellemeTarihi: n.guncellemeTarihi || Date.now()\n};\n\n\nmsg.not = note;\n\n\n\nmsg.payload = [ \n    { _id: note._id }, \n    note, \n    { upsert: true } \n    ];\n\nreturn [msg, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1338,7 +1499,7 @@
         "type": "function",
         "z": "d82cc3adf5c288a2",
         "name": "DeleteFiltre",
-        "func": "const id = msg.req.params.id;\n\nif (id == null) {\n    msg.payload = { hata: \"Lütfen id girişi yapınız.\" };\n    return [null, msg];\n}\n\nmsg.payload = [ { _id: id } ];\nreturn [msg, null];",
+        "func": "const id = msg.req.params.id;\n\nif (id == null) {\n    msg.payload = { hata: \"Lütfen id girişi yapınız.\" };\n    return [null, msg];\n}\n\nlet filtre = { _id: id };\n\nif (!msg.adminMi) {\n    filtre.kullaniciId = msg.kullaniciId;\n}\n\nmsg.payload = [ filtre ];\nreturn [msg, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1409,7 +1570,7 @@
         "type": "function",
         "z": "35b964c2a4e7b812",
         "name": "GüncellemeFiltre",
-        "func": "const id = msg.req.params.id;\nconst n  = msg.payload || {};\n\nif (id == null) {\n    msg.payload = { hata: \"id zorunlu\" };\n    return [null, msg];\n}\n\nconst alanlar = {\n    baslik:           n.baslik,\n    aciklama:         n.aciklama || \"\",\n    oncelik:          n.oncelik || 2,\n    silindiMi:        n.silindiMi,\n    kategoriId: n.kategoriId || n.kategori || \"\",\n    kullaniciId: n.kullaniciId || n.kullanici || \"\",\n    guncellemeTarihi: n.guncellemeTarihi\n};\n\n\nmsg.payload = [ \n    { _id: id }, \n    { $set: alanlar }, \n    { upsert: true } \n    ];\n\nreturn [msg, null];",
+        "func": "const id = msg.req.params.id;\nconst n  = msg.payload || {};\n\nif (id == null) {\n    msg.payload = { hata: \"id zorunlu\" };\n    return [null, msg];\n}\n\nlet filtre = { _id: id };\n\nif (!msg.adminMi) {\n    filtre.kullaniciId = msg.kullaniciId;\n}\n\nconst alanlar = {\n    baslik:           n.baslik,\n    aciklama:         n.aciklama || \"\",\n    oncelik:          n.oncelik || 2,\n    silindiMi:        n.silindiMi === true,\n    kategoriId: n.kategoriId || n.kategori || \"\",\n    guncellemeTarihi: n.guncellemeTarihi || Date.now()\n};\n\nif (msg.adminMi) {\n    alanlar.kullaniciId = n.kullaniciId || n.kullanici || \"\";\n}\n\n\nmsg.payload = [ \n    filtre, \n    { $set: alanlar } \n    ];\n\nreturn [msg, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1480,7 +1641,7 @@
         "type": "function",
         "z": "59b03ea7b921cbf5",
         "name": "SenkronFiltre",
-        "func": "let notlar = msg.payload\n\n\nif (notlar.length == 0) {\n    msg.payload = [];\n    return [null, msg];\n}\n\nif (notlar.some(n => n == null || n._id == null)) {\n    msg.payload = { hata: \"Notlarda ID eksik\" };\n    return [null, msg];\n}\n\nmsg.kaydedilenler = notlar.map(n => n._id);\n\nmsg.payload = [ notlar.map(n => {\n    if (n.silindiMi === true) {\n        return { deleteOne: { filter: { _id: n._id } } };\n    }\n    return {\n        replaceOne: {\n            filter: { _id: n._id },\n            replacement: {\n                _id:              n._id,\n                baslik:           n.baslik,\n                aciklama:         n.aciklama || \"\",\n                oncelik:          n.oncelik || 2,\n                silindiMi:        false,\n                kategoriId: n.kategoriId || n.kategori || \"\",\n                kullaniciId: n.kullaniciId || n.kullanici || \"\", \n                guncellemeTarihi: n.guncellemeTarihi || Date.now()\n            },\n            upsert: true\n        }\n    };\n}) ];\n\nreturn [msg, null];",
+        "func": "const uid = msg.kullaniciId;\nconst adminMi = msg.adminMi === true;\nlet notlar = msg.payload;\n\nif (!Array.isArray(notlar) || notlar.length === 0) { msg.payload = []; return [null, msg]; }\nif (notlar.some(n => n == null || n._id == null)) {\n    msg.payload = { hata: \"Notlarda ID eksik\" };\n    return [null, msg];\n}\n\nmsg.kaydedilenler = notlar.map(n => n._id);\n\nmsg.payload = [ notlar.map(n => {\n\n    let filtre = { _id: n._id };\n\n    if (!adminMi) {\n        filtre.kullaniciId = uid;\n    }\n\n    if (n.silindiMi === true) {\n        return { deleteOne: { filter: filtre } };\n    }\n\n    let alanlar = {\n        baslik:           n.baslik,\n        aciklama:         n.aciklama || \"\",\n        oncelik:          n.oncelik || 2,\n        kategoriId: n.kategoriId || \"\",\n        silindiMi:        false,\n        guncellemeTarihi: n.guncellemeTarihi || Date.now()\n    };\n\n    let ilkKayit = {};\n\n    if (adminMi) {\n        alanlar.kullaniciId = n.kullaniciId || \"\";\n    } else {\n        ilkKayit.kullaniciId = uid;\n    }\n\n    return {\n        updateOne: {\n            filter: filtre,\n            update: { $set: alanlar, $setOnInsert: ilkKayit },\n            upsert: true\n        }\n    };\n}) ];\n\nreturn [msg, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -1598,7 +1759,7 @@
         "y": 80,
         "wires": [
             [
-                "fb15fc52b7d783a2"
+                "aa3a2ba0ec671890"
             ]
         ]
     },
@@ -1628,7 +1789,7 @@
         "y": 180,
         "wires": [
             [
-                "8f2632081b950dc5"
+                "d3faaea06b188e0f"
             ]
         ]
     },
@@ -1658,7 +1819,7 @@
         "y": 260,
         "wires": [
             [
-                "f5c8b85d2ebc6210"
+                "f1ea8e8b44b5d126"
             ]
         ]
     },
@@ -1675,7 +1836,7 @@
         "y": 340,
         "wires": [
             [
-                "2b18a61d01332e64"
+                "5d12aeede692b1a3"
             ]
         ]
     },
@@ -1684,7 +1845,7 @@
         "type": "subflow:5cdcc70dcac84c81",
         "z": "8d32cb445752d947",
         "name": "",
-        "x": 560,
+        "x": 700,
         "y": 80,
         "wires": [
             [
@@ -1697,7 +1858,7 @@
         "type": "subflow:cb699f4ac2c58699",
         "z": "8d32cb445752d947",
         "name": "",
-        "x": 560,
+        "x": 700,
         "y": 180,
         "wires": [
             [
@@ -1710,7 +1871,7 @@
         "type": "subflow:d82cc3adf5c288a2",
         "z": "8d32cb445752d947",
         "name": "",
-        "x": 570,
+        "x": 710,
         "y": 340,
         "wires": [
             [
@@ -1734,7 +1895,7 @@
         "type": "subflow:35b964c2a4e7b812",
         "z": "8d32cb445752d947",
         "name": "",
-        "x": 570,
+        "x": 710,
         "y": 260,
         "wires": [
             [
@@ -1763,11 +1924,11 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 230,
+        "x": 210,
         "y": 420,
         "wires": [
             [
-                "8f91f4e96b84ccf3"
+                "88a181307942f6c5"
             ]
         ]
     },
@@ -1787,11 +1948,76 @@
         "type": "subflow:212bce85d20dd4bd",
         "z": "8d32cb445752d947",
         "name": "",
-        "x": 560,
+        "x": 700,
         "y": 420,
         "wires": [
             [
                 "172d0bc6f6f31f14"
+            ]
+        ]
+    },
+    {
+        "id": "88a181307942f6c5",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "8d32cb445752d947",
+        "name": "",
+        "x": 430,
+        "y": 420,
+        "wires": [
+            [
+                "8f91f4e96b84ccf3"
+            ]
+        ]
+    },
+    {
+        "id": "5d12aeede692b1a3",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "8d32cb445752d947",
+        "name": "",
+        "x": 430,
+        "y": 340,
+        "wires": [
+            [
+                "2b18a61d01332e64"
+            ]
+        ]
+    },
+    {
+        "id": "f1ea8e8b44b5d126",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "8d32cb445752d947",
+        "name": "",
+        "x": 430,
+        "y": 260,
+        "wires": [
+            [
+                "f5c8b85d2ebc6210"
+            ]
+        ]
+    },
+    {
+        "id": "d3faaea06b188e0f",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "8d32cb445752d947",
+        "name": "",
+        "x": 430,
+        "y": 180,
+        "wires": [
+            [
+                "8f2632081b950dc5"
+            ]
+        ]
+    },
+    {
+        "id": "aa3a2ba0ec671890",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "8d32cb445752d947",
+        "name": "",
+        "x": 430,
+        "y": 80,
+        "wires": [
+            [
+                "fb15fc52b7d783a2"
             ]
         ]
     },
@@ -2055,11 +2281,11 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 270,
+        "x": 170,
         "y": 180,
         "wires": [
             [
-                "0c88fcebe2ef3b18"
+                "44600ebf4cded379"
             ]
         ]
     },
@@ -2072,7 +2298,7 @@
         "headers": {
             "content-type": "application/json; charset=utf-8"
         },
-        "x": 960,
+        "x": 1190,
         "y": 180,
         "wires": []
     },
@@ -2086,11 +2312,11 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 300,
+        "x": 190,
         "y": 280,
         "wires": [
             [
-                "af73a1521210ce76"
+                "101b48137349e85b"
             ]
         ]
     },
@@ -2103,7 +2329,7 @@
         "headers": {
             "content-type": "application/json; charset=utf-8"
         },
-        "x": 960,
+        "x": 1190,
         "y": 280,
         "wires": []
     },
@@ -2117,11 +2343,11 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 310,
+        "x": 210,
         "y": 360,
         "wires": [
             [
-                "c6e03c920a1cee9d"
+                "aa11000000000001"
             ]
         ]
     },
@@ -2135,11 +2361,11 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 290,
+        "x": 190,
         "y": 440,
         "wires": [
             [
-                "79f9c1ccea712ec5"
+                "309daf9dddeaa3d6"
             ]
         ]
     },
@@ -2148,7 +2374,7 @@
         "type": "subflow:efa7cd3b3f841bdf",
         "z": "8d6ef5806aab97ef",
         "name": "",
-        "x": 610,
+        "x": 970,
         "y": 180,
         "wires": [
             [
@@ -2161,7 +2387,7 @@
         "type": "subflow:1af856080a8e842c",
         "z": "8d6ef5806aab97ef",
         "name": "",
-        "x": 630,
+        "x": 970,
         "y": 280,
         "wires": [
             [
@@ -2174,7 +2400,7 @@
         "type": "subflow:41519d6018526434",
         "z": "8d6ef5806aab97ef",
         "name": "",
-        "x": 640,
+        "x": 980,
         "y": 440,
         "wires": [
             [
@@ -2189,7 +2415,7 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 960,
+        "x": 1190,
         "y": 440,
         "wires": []
     },
@@ -2198,7 +2424,7 @@
         "type": "subflow:cd4d6937895bae9d",
         "z": "8d6ef5806aab97ef",
         "name": "",
-        "x": 640,
+        "x": 980,
         "y": 360,
         "wires": [
             [
@@ -2213,9 +2439,100 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 960,
+        "x": 1190,
         "y": 360,
         "wires": []
+    },
+    {
+        "id": "44600ebf4cded379",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "x": 490,
+        "y": 180,
+        "wires": [
+            [
+                "0c88fcebe2ef3b18"
+            ]
+        ]
+    },
+    {
+        "id": "8b38ed2a64ecb907",
+        "type": "subflow:93a0de60e9c91ce6",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "x": 740,
+        "y": 280,
+        "wires": [
+            [
+                "af73a1521210ce76"
+            ]
+        ]
+    },
+    {
+        "id": "101b48137349e85b",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "x": 490,
+        "y": 280,
+        "wires": [
+            [
+                "8b38ed2a64ecb907"
+            ]
+        ]
+    },
+    {
+        "id": "013695a13c2e0af3",
+        "type": "subflow:93a0de60e9c91ce6",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "x": 740,
+        "y": 360,
+        "wires": [
+            [
+                "c6e03c920a1cee9d"
+            ]
+        ]
+    },
+    {
+        "id": "d95960dbb23f7b15",
+        "type": "subflow:93a0de60e9c91ce6",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "x": 740,
+        "y": 440,
+        "wires": [
+            [
+                "79f9c1ccea712ec5"
+            ]
+        ]
+    },
+    {
+        "id": "309daf9dddeaa3d6",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "x": 490,
+        "y": 440,
+        "wires": [
+            [
+                "d95960dbb23f7b15"
+            ]
+        ]
+    },
+    {
+        "id": "aa11000000000001",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "8d6ef5806aab97ef",
+        "name": "",
+        "x": 490,
+        "y": 360,
+        "wires": [
+            [
+                "013695a13c2e0af3"
+            ]
+        ]
     },
     {
         "id": "70e3f40c406a26be",
@@ -2370,7 +2687,7 @@
         "type": "function",
         "z": "c56e099c537a8400",
         "name": "senkronFiltre",
-        "func": "let users = msg.payload\n\n\nif (users.length == 0) {\n    msg.payload = [];\n    return [null, msg];\n}\n\nif (users.some(n => n == null || n._id == null)) {\n    msg.payload = { hata: \"Kullanıcılarda ID eksik\" };\n    return [null, msg];\n}\n\nmsg.kaydedilenler = users.map(n => n._id);\n\nmsg.payload = [users.map(n => {\n    if (n.silindiMi === true) {\n        return { deleteOne: { filter: { _id: n._id } } };\n    }\n    return {\n        replaceOne: {\n            filter: { _id: n._id },\n            replacement: {\n                _id:              n._id,\n                isim:           n.isim,\n                soyisim:        n.soyisim,\n                sifre:          n.sifre,\n                notlar:         n.notlar,\n                silindiMi:        false,\n                guncellemeTarihi: n.guncellemeTarihi || Date.now()\n            },\n            upsert: true\n        }\n    };\n}) ];\n\nreturn [msg, null];",
+        "func": "let users = msg.payload\n\n\nif (users.length == 0) {\n    msg.payload = [];\n    return [null, msg];\n}\n\nif (users.some(n => n == null || n._id == null)) {\n    msg.payload = { hata: \"Kullanıcılarda ID eksik\" };\n    return [null, msg];\n}\n\nmsg.kaydedilenler = users.map(n => n._id);\n\nmsg.payload = [users.map(n => {\n    if (n.silindiMi === true) {\n        return { deleteOne: { filter: { _id: n._id } } };\n    }\n    return {\n        updateOne: {\n            filter: { _id: n._id },\n            update: {\n                $set: {\n                    kullaniciAdi:     String(n.kullaniciAdi || \"\").trim().toLowerCase(),\n                    isim:           n.isim,\n                    soyisim:        n.soyisim || \"\",\n                    rol: n.rol === \"admin\" ? \"admin\" : \"kullanici\",\n                    silindiMi:        false,\n                    guncellemeTarihi: n.guncellemeTarihi || Date.now()\n                }\n            },\n            upsert: false\n        }\n    };\n}) ];\n\nreturn [msg, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -2551,6 +2868,26 @@
         "wires": []
     },
     {
+        "id": "aa11000000000007",
+        "type": "function",
+        "z": "37989a9b16f106cd",
+        "name": "KullaniciFiltre",
+        "func": "msg.payload = [ \n    { silindiMi: false }, \n    { projection: { sifreHash: 0 } } \n    ];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 340,
+        "wires": [
+            [
+                "4e78c656cd95df3d"
+            ]
+        ]
+    },
+    {
         "id": "58dd7a310dc69c99",
         "type": "http in",
         "z": "4a93125aa43535f1",
@@ -2560,11 +2897,11 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 280,
-        "y": 180,
+        "x": 160,
+        "y": 240,
         "wires": [
             [
-                "1c150adb681c67aa"
+                "08bdfcec254bd276"
             ]
         ]
     },
@@ -2575,8 +2912,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 890,
-        "y": 180,
+        "x": 1170,
+        "y": 240,
         "wires": []
     },
     {
@@ -2584,8 +2921,8 @@
         "type": "subflow:37989a9b16f106cd",
         "z": "4a93125aa43535f1",
         "name": "",
-        "x": 620,
-        "y": 180,
+        "x": 980,
+        "y": 240,
         "wires": [
             [
                 "fd5944d17054266f"
@@ -2602,11 +2939,11 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 300,
-        "y": 260,
+        "x": 180,
+        "y": 320,
         "wires": [
             [
-                "ada2e6820676b423"
+                "aa11000000000002"
             ]
         ]
     },
@@ -2617,8 +2954,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 890,
-        "y": 260,
+        "x": 1170,
+        "y": 320,
         "wires": []
     },
     {
@@ -2631,11 +2968,11 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 320,
-        "y": 340,
+        "x": 200,
+        "y": 400,
         "wires": [
             [
-                "af3a32991c548efb"
+                "9afe910d3053653a"
             ]
         ]
     },
@@ -2649,11 +2986,11 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 300,
-        "y": 420,
+        "x": 180,
+        "y": 480,
         "wires": [
             [
-                "a9f02e9ff99d7632"
+                "82fc951f5ce4e8cc"
             ]
         ]
     },
@@ -2664,8 +3001,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 890,
-        "y": 340,
+        "x": 1170,
+        "y": 400,
         "wires": []
     },
     {
@@ -2675,8 +3012,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 890,
-        "y": 420,
+        "x": 1170,
+        "y": 480,
         "wires": []
     },
     {
@@ -2684,8 +3021,8 @@
         "type": "subflow:b985aba4d8d9b1f7",
         "z": "4a93125aa43535f1",
         "name": "",
-        "x": 630,
-        "y": 260,
+        "x": 970,
+        "y": 320,
         "wires": [
             [
                 "2216279c70e59cb2"
@@ -2697,8 +3034,8 @@
         "type": "subflow:50708d0634de4b22",
         "z": "4a93125aa43535f1",
         "name": "",
-        "x": 620,
-        "y": 340,
+        "x": 980,
+        "y": 400,
         "wires": [
             [
                 "12f31ea361b1bbc7"
@@ -2710,11 +3047,115 @@
         "type": "subflow:39100c916c0faa1e",
         "z": "4a93125aa43535f1",
         "name": "",
-        "x": 640,
-        "y": 420,
+        "x": 980,
+        "y": 480,
         "wires": [
             [
                 "0b2bca122d4cd63e"
+            ]
+        ]
+    },
+    {
+        "id": "7a996e6288c6061b",
+        "type": "subflow:93a0de60e9c91ce6",
+        "z": "4a93125aa43535f1",
+        "name": "",
+        "x": 720,
+        "y": 400,
+        "wires": [
+            [
+                "af3a32991c548efb"
+            ]
+        ]
+    },
+    {
+        "id": "9afe910d3053653a",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "4a93125aa43535f1",
+        "name": "",
+        "x": 450,
+        "y": 400,
+        "wires": [
+            [
+                "7a996e6288c6061b"
+            ]
+        ]
+    },
+    {
+        "id": "4e996e3410abfd90",
+        "type": "subflow:93a0de60e9c91ce6",
+        "z": "4a93125aa43535f1",
+        "name": "",
+        "x": 720,
+        "y": 480,
+        "wires": [
+            [
+                "a9f02e9ff99d7632"
+            ]
+        ]
+    },
+    {
+        "id": "82fc951f5ce4e8cc",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "4a93125aa43535f1",
+        "name": "",
+        "x": 450,
+        "y": 480,
+        "wires": [
+            [
+                "4e996e3410abfd90"
+            ]
+        ]
+    },
+    {
+        "id": "2c73434978a4a1f6",
+        "type": "subflow:93a0de60e9c91ce6",
+        "z": "4a93125aa43535f1",
+        "name": "",
+        "x": 720,
+        "y": 240,
+        "wires": [
+            [
+                "1c150adb681c67aa"
+            ]
+        ]
+    },
+    {
+        "id": "08bdfcec254bd276",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "4a93125aa43535f1",
+        "name": "",
+        "x": 450,
+        "y": 240,
+        "wires": [
+            [
+                "2c73434978a4a1f6"
+            ]
+        ]
+    },
+    {
+        "id": "aa11000000000002",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "4a93125aa43535f1",
+        "name": "",
+        "x": 450,
+        "y": 320,
+        "wires": [
+            [
+                "aa11000000000003"
+            ]
+        ]
+    },
+    {
+        "id": "aa11000000000003",
+        "type": "subflow:93a0de60e9c91ce6",
+        "z": "4a93125aa43535f1",
+        "name": "",
+        "x": 720,
+        "y": 320,
+        "wires": [
+            [
+                "ada2e6820676b423"
             ]
         ]
     },
@@ -2723,7 +3164,7 @@
         "type": "function",
         "z": "b985aba4d8d9b1f7",
         "name": "Kullanıcı Normalizasyon",
-        "func": "let n = msg.payload;\n\nif (n == null || n._id == null || n.isim == null || n.sifre == null || n.soyisim == null) {\n    msg.payload = { hata: \"Id,isim,soyisim ve sifre bilgileri zorunludur.\" };\n    return [null, msg];\n}\n\nlet kullanici = {\n    _id: n._id,\n    isim: n.isim,\n    soyisim: n.soyisim,\n    sifre: n.sifre,\n    notlar: n.notlar,\n    silindiMi: n.silindiMi === true,\n    guncellemeTarihi: n.guncellemeTarihi || Date.now()\n};\n\nmsg.kullanici = kullanici;\n\n\n\nmsg.payload = [\n    { _id: kullanici._id },\n    kullanici,\n    { upsert: true }\n];\n\nreturn [msg, null];",
+        "func": "const bcrypt = global.get('bcrypt');\nlet n = msg.payload;\n\nif (n == null || n._id == null || n.isim == null || n.kullaniciAdi == null) {\n    msg.payload = { hata: \"Id,kullaniciAdi ve isim bilgileri zorunludur.\" };\n    return [null, msg];\n}\n\nlet kullanici = {\n    _id: n._id,\n    kullaniciAdi: String(n.kullaniciAdi).trim().toLowerCase(),\n    isim: n.isim,\n    soyisim: n.soyisim || \"\",\n    rol: n.rol === \"admin\" ? \"admin\" : \"kullanici\",\n    silindiMi: n.silindiMi === true,\n    guncellemeTarihi: n.guncellemeTarihi || Date.now()\n};\n\nif (n.sifre) {\n    kullanici.sifreHash = bcrypt.hashSync(n.sifre, 10);\n}\n\nmsg.kullanici = kullanici;\n\n\n\nmsg.payload = [\n    { _id: kullanici._id },\n    { $set: kullanici },\n    { upsert: true }\n];\n\nreturn [msg, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -2748,7 +3189,7 @@
         "clientNode": "6400ad6cb5353ade",
         "mode": "collection",
         "collection": "kullanicilar",
-        "operation": "replaceOne",
+        "operation": "updateOne",
         "output": "toArray",
         "maxTimeMS": "0",
         "handleDocId": false,
@@ -2794,7 +3235,7 @@
         "type": "function",
         "z": "50708d0634de4b22",
         "name": "GüncellemeFiltre",
-        "func": "const id = msg.req.params.id;\nconst n  = msg.payload || {};\n\nif (id == null) {\n    msg.payload = { hata: \"id zorunlu\" };\n    return [null, msg];\n}\n\nconst alanlar = {\n    isim:           n.isim,\n    soyisim:        n.soyisim,\n    sifre:          n.sifre,\n    notlar:         n.notlar,\n    silindiMi:        n.silindiMi,\n    guncellemeTarihi: n.guncellemeTarihi\n};\n\n\nmsg.payload = [ \n    { _id: id }, \n    { $set: alanlar }, \n    { upsert: true } \n    ];\n\nreturn [msg, null];",
+        "func": "const bcrypt = global.get('bcrypt');\nconst id = msg.req.params.id;\nconst n  = msg.payload || {};\n\nif (id == null) {\n    msg.payload = { hata: \"id zorunlu\" };\n    return [null, msg];\n}\n\nconst alanlar = {\n    isim:           n.isim,\n    soyisim:        n.soyisim || \"\",\n    rol: n.rol === \"admin\" ? \"admin\" : \"kullanici\",\n    silindiMi:        n.silindiMi === true,\n    guncellemeTarihi: n.guncellemeTarihi || Date.now()\n};\n\nif (n.kullaniciAdi) {\n    alanlar.kullaniciAdi = String(n.kullaniciAdi).trim().toLowerCase();\n}\n\nif (n.sifre) {\n    alanlar.sifreHash = bcrypt.hashSync(n.sifre, 10);\n}\n\n\nmsg.payload = [ \n    { _id: id }, \n    { $set: alanlar } \n    ];\n\nreturn [msg, null];",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -2936,7 +3377,7 @@
         "type": "function",
         "z": "212bce85d20dd4bd",
         "name": "notSayi",
-        "func": "msg.payload = [\n    { silindiMi:  false }\n];\n\nreturn msg;",
+        "func": "let filtre = { silindiMi: false };\n\nif (!msg.adminMi) {\n    filtre.kullaniciId = msg.kullaniciId;\n}\n\nmsg.payload = [ filtre ];\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2970,13 +3411,227 @@
         ]
     },
     {
+        "id": "742b7f0e9bad065d",
+        "type": "function",
+        "z": "c9c1757596cdb4ff",
+        "name": "bul",
+        "func": "const girdi = String(msg.payload?.kullaniciAdi || \"\").trim().toLowerCase();\nif (!girdi || !msg.payload?.sifre) {\n    msg.statusCode = 400;\n    msg.payload = { hata: \"Kullanıcı adı ve şifre zorunludur.\" };\n    return [null, msg];\n}\nmsg.girisSifre = msg.payload.sifre;\nmsg.payload = [{ kullaniciAdi: girdi, silindiMi: false }];\nreturn [msg, null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 190,
+        "y": 120,
+        "wires": [
+            [
+                "980e41d2f8b141bc"
+            ],
+            [
+                "984b6769034b3dca"
+            ]
+        ]
+    },
+    {
+        "id": "980e41d2f8b141bc",
+        "type": "mongodb4",
+        "z": "c9c1757596cdb4ff",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "kullanicilar",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 350,
+        "y": 80,
+        "wires": [
+            [
+                "9d1b614c60ea4538"
+            ]
+        ]
+    },
+    {
+        "id": "9d1b614c60ea4538",
+        "type": "function",
+        "z": "c9c1757596cdb4ff",
+        "name": "sifreKontrol",
+        "func": "const bcrypt = global.get('bcrypt');\nconst jwt    = global.get('jwt');\nconst secret = global.get('JWT_SECRET');\n\nconst girdi = Array.isArray(msg.payload) ? msg.payload[0] : msg.payload;\n\nif (!girdi || !bcrypt.compareSync(msg.girisSifre, girdi.sifreHash || \"\")) {\n        msg.statusCode = 401;\n    msg.payload = { hata: \"Kullanıcı adı veya şifre hatalı.\" };\n     return msg;   \n}\n\nconst token = jwt.sign(\n    { sub: girdi._id, ka: girdi.kullaniciAdi, rol: girdi.rol || \"kullanici\" },\n         secret,\n    { expiresIn: '30d' }\n);\n\nmsg.statusCode = 200;\nmsg .payload = {\n    token: token,\n        kullanici: {\n        _id: girdi._id,\n        kullaniciAdi: girdi.kullaniciAdi,\n        isim: girdi.isim,\n        soyisim: girdi.soyisim,\n        rol: girdi.rol || \"kullanici\"\n    }\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "984b6769034b3dca",
+        "type": "http response",
+        "z": "c9c1757596cdb4ff",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 310,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4b9ae7248dbe02a5",
+        "type": "function",
+        "z": "a2ca8e0f1a28cb97",
+        "name": "Doğrulama",
+        "func": "const jwt = global.get('jwt');\nconst secret = global.get('JWT_SECRET');\n\nconst header = msg.req?.headers?.authorization || \"\";\nconst token = header.startsWith(\"Bearer \") ? header.slice(7) : null;\n\nif (!token) {\n    msg.statusCode = 401;\n    msg.payload = { hata: \"Token yok.\" };\n    return [null, msg];\n}\n\ntry {\n    const veri = jwt.verify(token, secret);\n\n    msg.kullaniciId = veri.sub;\n    msg.rol         = veri.rol || \"kullanici\";\n    msg.adminMi     = msg.rol === \"admin\";\n\n    return [msg, null];\n} catch (e) {\n    msg.statusCode = 401;\n    msg.payload = { hata: \"Token geçersiz veya süresi dolmuş.\" };\n    return [null, msg];\n}",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 80,
+        "wires": [
+            [],
+            [
+                "87ca08d9b1c87aee"
+            ]
+        ]
+    },
+    {
+        "id": "87ca08d9b1c87aee",
+        "type": "http response",
+        "z": "a2ca8e0f1a28cb97",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 410,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "177253852f7f1423",
+        "type": "function",
+        "z": "93a0de60e9c91ce6",
+        "name": "AdminMi?",
+        "func": "if (msg.adminMi === true) return [msg, null];\nmsg.statusCode = 403;\nmsg.payload = { hata: \"Bu işlem için admin yetkisi gerekli.\" };\nreturn [null, msg];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [],
+            [
+                "f60eb2c3251b6f49"
+            ]
+        ]
+    },
+    {
+        "id": "f60eb2c3251b6f49",
+        "type": "http response",
+        "z": "93a0de60e9c91ce6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 350,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "c827248670e1172f",
+        "type": "function",
+        "z": "84254be51afc5726",
+        "name": "Normalizasyon",
+        "func": "const bcrypt = global.get('bcrypt');\nconst p = msg.payload;\n\nif (!p?.kullaniciAdi || !p?.sifre || !p?.isim) {\n    msg.statusCode = 400;\n    msg.payload = { hata: \"kullaniciAdi, isim ve sifre zorunludur.\" };\n    return [null, msg];\n}\n\nmsg.payload = [{\n    _id: p._id || require('crypto').randomUUID(),\n    kullaniciAdi: String(p.kullaniciAdi).trim().toLowerCase(),\n    isim: p.isim,\n    soyisim: p.soyisim || \"\",\n    sifreHash: bcrypt.hashSync(p.sifre, 10),\n    rol: (p.rol === \"admin\") ? \"admin\" : \"kullanici\",\n    silindiMi: false,\n    guncellemeTarihi: Date.now()\n}];\nreturn [msg, null];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 240,
+        "wires": [
+            [
+                "a75b7ac7276664d2"
+            ],
+            [
+                "aa11000000000006"
+            ]
+        ]
+    },
+    {
+        "id": "a75b7ac7276664d2",
+        "type": "mongodb4",
+        "z": "84254be51afc5726",
+        "clientNode": "6400ad6cb5353ade",
+        "mode": "collection",
+        "collection": "kullanicilar",
+        "operation": "insertOne",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 460,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "caf74d261ad35dcb",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "84254be51afc5726",
+        "name": "",
+        "x": 250,
+        "y": 80,
+        "wires": [
+            [
+                "bcc999a29a3faa23"
+            ]
+        ]
+    },
+    {
+        "id": "bcc999a29a3faa23",
+        "type": "subflow:93a0de60e9c91ce6",
+        "z": "84254be51afc5726",
+        "name": "",
+        "x": 240,
+        "y": 160,
+        "wires": [
+            [
+                "c827248670e1172f"
+            ]
+        ]
+    },
+    {
+        "id": "aa11000000000006",
+        "type": "http response",
+        "z": "84254be51afc5726",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 600,
+        "y": 220,
+        "wires": []
+    },
+    {
         "id": "5d97bd190ce25eae",
         "type": "http response",
         "z": "4f06cfd721a0067d",
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 890,
+        "x": 970,
         "y": 340,
         "wires": []
     },
@@ -2990,7 +3645,7 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 420,
+        "x": 220,
         "y": 340,
         "wires": [
             [
@@ -3007,9 +3662,9 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<!DOCTYPE html>\n<html lang=\"tr\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Not, Kategori ve Kullanıcı Yönetim Paneli</title>\n  <style>\n    * {\n      box-sizing: border-box;\n      margin: 0;\n      padding: 0;\n      font-family: Arial, Helvetica, sans-serif;\n      font-size: 13px;\n    }\n\n    body {\n      background: #eee;\n      color: #222;\n      padding: 15px;\n    }\n\n    .app-container {\n      max-width: 1150px;\n      margin: 0 auto;\n      background: #fff;\n      border: 1px solid #ccc;\n      display: flex;\n      flex-direction: column;\n      min-height: 700px;\n    }\n\n    .top-bar {\n      background: #e9ecef;\n      border-bottom: 1px solid #ccc;\n      padding: 8px 15px;\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n    }\n\n    .top-bar-title {\n      font-size: 14px;\n      font-weight: bold;\n      color: #333;\n    }\n\n    .sync-actions {\n      display: flex;\n      gap: 6px;\n    }\n\n    .layout-body {\n      display: flex;\n      flex: 1;\n    }\n\n    .sidebar {\n      width: 280px;\n      border-right: 1px solid #ccc;\n      background: #f7f7f7;\n      padding: 12px;\n      display: flex;\n      flex-direction: column;\n      gap: 12px;\n    }\n\n    .main-content {\n      flex: 1;\n      padding: 15px;\n      display: flex;\n      flex-direction: column;\n      gap: 15px;\n      overflow-y: auto;\n    }\n\n    .section-title {\n      font-size: 13px;\n      font-weight: bold;\n      padding-bottom: 4px;\n      border-bottom: 1px solid #ddd;\n      color: #333;\n      margin-bottom: 8px;\n    }\n\n    .panel-box {\n      border: 1px solid #ddd;\n      background: #fafafa;\n      padding: 10px;\n    }\n\n    .form-group {\n      margin-bottom: 8px;\n    }\n\n    .form-group label {\n      display: block;\n      margin-bottom: 3px;\n      font-weight: bold;\n      color: #444;\n      font-size: 12px;\n    }\n\n    input[type=\"text\"], input[type=\"password\"], select, textarea {\n      width: 100%;\n      border: 1px solid #aaa;\n      padding: 5px 6px;\n      background: #fff;\n      color: #000;\n    }\n\n    input:focus, select:focus, textarea:focus {\n      border-color: #555;\n      outline: none;\n    }\n\n    button {\n      padding: 5px 10px;\n      background: #e1e1e1;\n      border: 1px solid #adadad;\n      color: #000;\n      cursor: pointer;\n    }\n\n    button:hover {\n      background: #d4d4d4;\n      border-color: #888;\n    }\n\n    button:disabled {\n      opacity: 0.4;\n      cursor: not-allowed;\n    }\n\n    .btn-small {\n      padding: 2px 6px;\n      font-size: 11px;\n    }\n\n    .btn-sync {\n      background: #d9e6f2;\n      border-color: #9cbacf;\n      font-weight: bold;\n    }\n\n    .btn-sync:hover {\n      background: #c3d7ea;\n    }\n\n    .btn-danger {\n      color: #900;\n    }\n\n    .list-box {\n      list-style: none;\n      border: 1px solid #ddd;\n      background: #fff;\n      max-height: 180px;\n      overflow-y: auto;\n    }\n\n    .list-item {\n      padding: 6px 8px;\n      border-bottom: 1px solid #eee;\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      cursor: pointer;\n    }\n\n    .list-item:hover {\n      background: #f0f0f0;\n    }\n\n    .list-item.active {\n      background: #d9e6f2;\n      font-weight: bold;\n    }\n\n    .filter-bar {\n      display: flex;\n      gap: 10px;\n      align-items: center;\n      background: #fdfdfd;\n      border: 1px solid #ddd;\n      padding: 6px 10px;\n    }\n\n    .notes-list {\n      display: flex;\n      flex-direction: column;\n      gap: 10px;\n    }\n\n    .note-row {\n      border: 1px solid #ccc;\n      background: #fff;\n      padding: 10px;\n    }\n\n    .note-top {\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      background: #f4f4f4;\n      padding: 4px 8px;\n      border-bottom: 1px solid #e5e5e5;\n      margin: -10px -10px 8px -10px;\n    }\n\n    .note-badges {\n      display: flex;\n      gap: 4px;\n    }\n\n    .note-badge {\n      font-size: 11px;\n      background: #e2e2e2;\n      border: 1px solid #ccc;\n      padding: 1px 5px;\n    }\n\n    .note-badge.user-badge {\n      background: #e8f4fd;\n      border-color: #bcdffb;\n      color: #0b5394;\n      font-weight: bold;\n    }\n\n    .note-meta {\n      font-size: 11px;\n      color: #666;\n      margin-top: 6px;\n    }\n\n    .note-text {\n      color: #333;\n      line-height: 1.4;\n      white-space: pre-wrap;\n    }\n\n    .note-bottom {\n      margin-top: 8px;\n      text-align: right;\n    }\n\n    .pagination-wrapper {\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      background: #fdfdfd;\n      border: 1px solid #ddd;\n      padding: 8px 12px;\n      margin-top: 12px;\n    }\n\n    .pagination-actions {\n      display: flex;\n      gap: 6px;\n      align-items: center;\n    }\n\n    .page-indicator {\n      font-weight: bold;\n      color: #444;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"app-container\">\n    \n    <!-- ÜST BAR: SENKRONİZASYON -->\n    <div class=\"top-bar\">\n      <div class=\"top-bar-title\">Yönetim & Senkronizasyon Konsolu</div>\n      <div class=\"sync-actions\">\n        <button class=\"btn-sync\" onclick=\"syncUsers()\">Kullanıcıları Senkronize Et (/user/sync)</button>\n        <button class=\"btn-sync\" onclick=\"syncCategories()\">Kategorileri Senkronize Et (/kategori/sync)</button>\n        <button class=\"btn-sync\" onclick=\"syncNotes()\">Notları Senkronize Et (/notes/sync)</button>\n      </div>\n    </div>\n\n    <div class=\"layout-body\">\n      \n      <!-- SOL PANEL: KULLANICILAR & KATEGORİLER -->\n      <div class=\"sidebar\">\n        \n        <!-- KULLANICI YÖNETİMİ -->\n        <div>\n          <div class=\"section-title\">Kullanıcı Tanımlama</div>\n          <div class=\"panel-box\">\n            <input type=\"hidden\" id=\"editUserId\">\n            \n            <div class=\"form-group\">\n              <input type=\"text\" id=\"userIsim\" placeholder=\"İsim (*)\">\n            </div>\n            <div class=\"form-group\">\n              <input type=\"text\" id=\"userSoyisim\" placeholder=\"Soyisim (*)\">\n            </div>\n            <div class=\"form-group\">\n              <input type=\"password\" id=\"userSifre\" placeholder=\"Şifre (*)\">\n            </div>\n\n            <div style=\"display: flex; gap: 4px;\">\n              <button id=\"saveUserBtn\" onclick=\"saveUser()\">Kaydet</button>\n              <button id=\"cancelUserBtn\" style=\"display:none;\" onclick=\"resetUserForm()\">İptal</button>\n            </div>\n          </div>\n\n          <div style=\"margin-top: 6px; font-weight: bold; font-size: 11px;\">Kullanıcı Listesi:</div>\n          <ul class=\"list-box\" id=\"userList\" style=\"margin-top: 4px;\"></ul>\n        </div>\n\n        <!-- KATEGORİ YÖNETİMİ -->\n        <div>\n          <div class=\"section-title\">Kategoriler</div>\n          <div class=\"panel-box\">\n            <input type=\"hidden\" id=\"editCatId\">\n            <div class=\"form-group\">\n              <input type=\"text\" id=\"catNameInput\" placeholder=\"Kategori Adı (*)\">\n            </div>\n            <div style=\"display: flex; gap: 4px;\">\n              <button id=\"saveCatBtn\" onclick=\"saveCategory()\">Ekle</button>\n              <button id=\"cancelCatBtn\" style=\"display:none;\" onclick=\"resetCategoryForm()\">İptal</button>\n            </div>\n          </div>\n\n          <ul class=\"list-box\" id=\"catList\" style=\"margin-top: 8px;\"></ul>\n        </div>\n\n      </div>\n\n      <!-- SAĞ PANEL: NOTLAR -->\n      <div class=\"main-content\">\n        \n        <!-- Not Form Alanı -->\n        <div class=\"panel-box\">\n          <div class=\"section-title\" id=\"noteFormHeader\">Not Girişi</div>\n          <input type=\"hidden\" id=\"editNoteId\">\n          \n          <div style=\"display: flex; gap: 8px; margin-bottom: 8px;\">\n            <div style=\"flex: 2;\">\n              <label>Başlık (*):</label>\n              <input type=\"text\" id=\"noteTitleInput\">\n            </div>\n            <div style=\"flex: 1.2;\">\n              <label>Atanan Kullanıcı:</label>\n              <select id=\"noteUserSelect\"></select>\n            </div>\n            <div style=\"flex: 1;\">\n              <label>Kategori:</label>\n              <select id=\"noteCatSelect\"></select>\n            </div>\n            <div style=\"flex: 0.8;\">\n              <label>Öncelik:</label>\n              <select id=\"notePrioritySelect\">\n                <option value=\"1\">1 - Düşük</option>\n                <option value=\"2\" selected>2 - Normal</option>\n                <option value=\"3\">3 - Yüksek</option>\n              </select>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <label>Açıklama:</label>\n            <textarea id=\"noteContentInput\" rows=\"3\"></textarea>\n          </div>\n\n          <div style=\"display: flex; gap: 6px;\">\n            <button id=\"saveNoteBtn\" onclick=\"saveNote()\">Notu Kaydet</button>\n            <button id=\"cancelNoteBtn\" style=\"display:none;\" onclick=\"resetNoteForm()\">İptal</button>\n          </div>\n        </div>\n\n        <!-- Not Filtreleme & Liste Alanı -->\n        <div>\n          <div class=\"filter-bar\">\n            <strong>Filtrele:</strong>\n            <label>Kullanıcı:</label>\n            <select id=\"filterUserSelect\" onchange=\"applyFilters()\" style=\"width: auto;\"></select>\n            <span id=\"currentViewText\" style=\"margin-left: auto; color: #555; font-weight: bold;\"></span>\n          </div>\n\n          <div class=\"notes-list\" id=\"notesContainer\" style=\"margin-top: 10px;\"></div>\n\n          <!-- Sayfalama Kontrolleri -->\n          <div class=\"pagination-wrapper\">\n            <span class=\"page-indicator\" id=\"pageIndicator\">Sayfa: 1 / 1</span>\n            <div class=\"pagination-actions\">\n              <button id=\"btnPrevPage\" onclick=\"changePage(-1)\">&laquo; Önceki</button>\n              <span id=\"pageDetailText\" style=\"color: #666; font-size: 11px;\"></span>\n              <button id=\"btnNextPage\" onclick=\"changePage(1)\">Sonraki &raquo;</button>\n            </div>\n          </div>\n        </div>\n\n      </div>\n\n    </div>\n\n  </div>\n\n  <script>\n    const currentHost = window.location.hostname || '127.0.0.1';\n    const API_BASE = `http://${currentHost}:1880`;\n\n    let users = [];\n    let categories = [];\n    let notes = [];\n    let totalNoteCount = 0;\n\n    let selectedCategoryFilter = 'all';\n    let selectedUserFilter = 'all';\n\n    let currentPage = 1;\n    const PAGE_LIMIT = 10;\n\n    function getCategoryName(catVal) {\n      if (!catVal) return 'Kategorisiz';\n      const found = categories.find(c => c._id === catVal || c.isim === catVal);\n      return found ? found.isim : catVal;\n    }\n\n    function getUserName(userVal) {\n      if (!userVal) return 'Genel';\n      const found = users.find(u => u._id === userVal || `${u.isim} ${u.soyisim}` === userVal);\n      return found ? `${found.isim} ${found.soyisim}` : userVal;\n    }\n\n    // --- TOPLAM NOT SAYISI API İŞLEMİ ---\n   async function fetchTotalNoteCount() {\n  try {\n    const res = await fetch(`${API_BASE}/notsayisi`);\n    if (res.ok) {\n      const data = await res.json();\n      \n      if (typeof data === 'number') {\n        totalNoteCount = data;\n      } else if (data && typeof data === 'object') {\n        totalNoteCount = data.count ?? data.total ?? 0;\n      } else {\n        totalNoteCount = Number(data) || 0;\n      }\n\n      renderCategories();\n      renderNotes();\n    }\n  } catch (err) {\n    console.error(\"Not sayısı alınamadı:\", err);\n  }\n}\n\n    // --- KULLANICI API İŞLEMLERİ ---\n    async function fetchUsers() {\n      try {\n        const res = await fetch(`${API_BASE}/user`);\n        if (res.ok) {\n          const data = await res.json();\n          users = Array.isArray(data) ? data.filter(u => !u.silindiMi) : [];\n          renderUsers();\n        }\n      } catch (err) {\n        console.error(\"Kullanıcılar getirilemedi:\", err);\n      }\n    }\n\n    async function saveUser() {\n      const isim = document.getElementById('userIsim').value.trim();\n      const soyisim = document.getElementById('userSoyisim').value.trim();\n      const sifre = document.getElementById('userSifre').value.trim();\n      const editId = document.getElementById('editUserId').value;\n\n      if (!isim || !soyisim || !sifre) {\n        alert('Id, isim, soyisim ve şifre bilgileri zorunludur.');\n        return;\n      }\n\n      const existingUser = users.find(u => u._id === editId);\n      const userPayload = {\n        _id: editId || Date.now().toString(),\n        isim: isim,\n        soyisim: soyisim,\n        sifre: sifre,\n        notlar: existingUser ? (existingUser.notlar || []) : [],\n        silindiMi: false,\n        guncellemeTarihi: Date.now()\n      };\n\n      try {\n        let res;\n        if (editId) {\n          res = await fetch(`${API_BASE}/userDuzenle/${editId}`, {\n            method: 'PUT',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(userPayload)\n          });\n        } else {\n          res = await fetch(`${API_BASE}/userEkle`, {\n            method: 'POST',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(userPayload)\n          });\n        }\n\n        if (res.ok) {\n          resetUserForm();\n          await fetchUsers();\n        } else {\n          const err = await res.json();\n          alert('Kullanıcı kaydedilemedi: ' + (err.hata || 'Sunucu hatası'));\n        }\n      } catch (err) {\n        console.error(\"User Post/Put Hatası:\", err);\n      }\n    }\n\n    async function deleteUser(id) {\n      if (!confirm('Kullanıcı silinsin mi?')) return;\n\n      try {\n        const res = await fetch(`${API_BASE}/user/${id}`, { method: 'DELETE' });\n        if (res.ok) await fetchUsers();\n      } catch (err) {\n        console.error(\"Kullanıcı silme hatası:\", err);\n      }\n    }\n\n    function editUser(id) {\n      const u = users.find(x => x._id === id);\n      if (!u) return;\n\n      document.getElementById('editUserId').value = u._id;\n      document.getElementById('userIsim').value = u.isim || '';\n      document.getElementById('userSoyisim').value = u.soyisim || '';\n      document.getElementById('userSifre').value = u.sifre || '';\n\n      document.getElementById('saveUserBtn').textContent = 'Güncelle';\n      document.getElementById('cancelUserBtn').style.display = 'inline-block';\n    }\n\n    function resetUserForm() {\n      document.getElementById('editUserId').value = '';\n      document.getElementById('userIsim').value = '';\n      document.getElementById('userSoyisim').value = '';\n      document.getElementById('userSifre').value = '';\n\n      document.getElementById('saveUserBtn').textContent = 'Kaydet';\n      document.getElementById('cancelUserBtn').style.display = 'none';\n    }\n\n    // --- KATEGORİ API İŞLEMLERİ ---\n    async function fetchCategories() {\n      try {\n        const res = await fetch(`${API_BASE}/kategori`);\n        if (res.ok) {\n          const data = await res.json();\n          categories = Array.isArray(data) ? data.filter(c => !c.silindiMi) : [];\n          renderCategories();\n        }\n      } catch (err) {\n        console.error(\"Kategoriler alınamadı:\", err);\n      }\n    }\n\n    async function saveCategory() {\n      const isim = document.getElementById('catNameInput').value.trim();\n      const editId = document.getElementById('editCatId').value;\n\n      if (!isim) {\n        alert('Kategori ismi boş bırakılamaz.');\n        return;\n      }\n\n      const payload = {\n        _id: editId || Date.now().toString(),\n        isim: isim,\n        silindiMi: false,\n        guncellemeTarihi: Date.now()\n      };\n\n      try {\n        let res;\n        if (editId) {\n          res = await fetch(`${API_BASE}/kategoriDuzenle/${editId}`, {\n            method: 'PUT',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(payload)\n          });\n        } else {\n          res = await fetch(`${API_BASE}/kategoriEkle`, {\n            method: 'POST',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(payload)\n          });\n        }\n\n        if (res.ok) {\n          resetCategoryForm();\n          await fetchCategories();\n        } else {\n          const err = await res.json();\n          alert('Hata: ' + (err.hata || 'Kategori kaydedilemedi.'));\n        }\n      } catch (err) {\n        console.error(\"Kategori kaydetme hatası:\", err);\n      }\n    }\n\n    async function deleteCategory(id, e) {\n      e.stopPropagation();\n      if (!confirm('Bu kategoriyi silmek istiyor musunuz?')) return;\n\n      try {\n        const res = await fetch(`${API_BASE}/kategori/${id}`, { method: 'DELETE' });\n        if (res.ok) {\n          if (selectedCategoryFilter === id) selectedCategoryFilter = 'all';\n          await fetchCategories();\n        }\n      } catch (err) {\n        console.error(\"Kategori silme hatası:\", err);\n      }\n    }\n\n    function editCategory(id, e) {\n      e.stopPropagation();\n      const cat = categories.find(c => c._id === id);\n      if (!cat) return;\n\n      document.getElementById('editCatId').value = cat._id;\n      document.getElementById('catNameInput').value = cat.isim || '';\n      document.getElementById('saveCatBtn').textContent = 'Güncelle';\n      document.getElementById('cancelCatBtn').style.display = 'inline-block';\n    }\n\n    function resetCategoryForm() {\n      document.getElementById('editCatId').value = '';\n      document.getElementById('catNameInput').value = '';\n      document.getElementById('saveCatBtn').textContent = 'Ekle';\n      document.getElementById('cancelCatBtn').style.display = 'none';\n    }\n\n    // --- NOT API İŞLEMLERİ ---\n    async function fetchNotes() {\n      try {\n        const res = await fetch(`${API_BASE}/notes?page=${currentPage}`);\n        if (res.ok) {\n          const data = await res.json();\n          notes = Array.isArray(data) ? data.filter(n => !n.silindiMi) : [];\n          render();\n        }\n      } catch (err) {\n        console.error(\"Notlar alınamadı:\", err);\n      }\n    }\n\n    async function changePage(direction) {\n      const totalPages = Math.ceil(totalNoteCount / PAGE_LIMIT) || 1;\n      const targetPage = currentPage + direction;\n      if (targetPage < 1 || targetPage > totalPages) return;\n      currentPage = targetPage;\n      await fetchNotes();\n    }\n\n    async function saveNote() {\n      const baslik = document.getElementById('noteTitleInput').value.trim();\n      const selectedCatVal = document.getElementById('noteCatSelect').value;\n      const selectedUserVal = document.getElementById('noteUserSelect').value;\n      const aciklama = document.getElementById('noteContentInput').value.trim();\n      const oncelik = parseInt(document.getElementById('notePrioritySelect').value, 10);\n      const editId = document.getElementById('editNoteId').value;\n\n      if (!baslik) {\n        alert('Başlık alanı zorunludur.');\n        return;\n      }\n\n      const targetNoteId = editId || Date.now().toString();\n\n      const foundCat = categories.find(c => c._id === selectedCatVal || c.isim === selectedCatVal);\n      const foundUser = users.find(u => u._id === selectedUserVal || `${u.isim} ${u.soyisim}` === selectedUserVal);\n\n      const payload = {\n        _id: targetNoteId,\n        baslik: baslik,\n        aciklama: aciklama || \"\",\n        oncelik: oncelik || 2,\n        silindiMi: false,\n        kategoriId: foundCat ? foundCat._id : (selectedCatVal || \"\"),\n        kategori: foundCat ? foundCat.isim : (selectedCatVal || \"\"),\n        kullaniciId: selectedUserVal ? (foundUser ? foundUser._id : selectedUserVal) : null,\n        kullanici: selectedUserVal ? (foundUser ? `${foundUser.isim} ${foundUser.soyisim}` : selectedUserVal) : null,\n        guncellemeTarihi: Date.now()\n      };\n\n      try {\n        let res;\n        if (editId) {\n          res = await fetch(`${API_BASE}/note/${editId}`, {\n            method: 'PUT',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(payload)\n          });\n        } else {\n          res = await fetch(`${API_BASE}/note`, {\n            method: 'POST',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(payload)\n          });\n        }\n\n        if (res.ok) {\n          resetNoteForm();\n          await fetchTotalNoteCount();\n          await fetchNotes();\n        } else {\n          const err = await res.json();\n          alert('Hata: ' + (err.hata || 'Not kaydedilemedi.'));\n        }\n      } catch (err) {\n        console.error(\"Not kaydetme hatası:\", err);\n      }\n    }\n\n    async function deleteNote(id) {\n      if (!confirm('Bu notu silmek istiyor musunuz?')) return;\n\n      try {\n        const res = await fetch(`${API_BASE}/note/${id}`, { method: 'DELETE' });\n        if (res.ok) {\n          await fetchTotalNoteCount();\n          await fetchNotes();\n        }\n      } catch (err) {\n        console.error(\"Not silme hatası:\", err);\n      }\n    }\n\n    function editNote(id) {\n      const note = notes.find(n => n._id === id);\n      if (!note) return;\n\n      document.getElementById('editNoteId').value = note._id;\n      document.getElementById('noteTitleInput').value = note.baslik || '';\n      document.getElementById('noteUserSelect').value = note.kullaniciId || note.kullanici || '';\n      document.getElementById('noteCatSelect').value = note.kategoriId || note.kategori || '';\n      document.getElementById('notePrioritySelect').value = note.oncelik || 2;\n      document.getElementById('noteContentInput').value = note.aciklama || '';\n\n      document.getElementById('noteFormHeader').textContent = 'Notu Düzenle';\n      document.getElementById('saveNoteBtn').textContent = 'Güncelle';\n      document.getElementById('cancelNoteBtn').style.display = 'inline-block';\n    }\n\n    function resetNoteForm() {\n      document.getElementById('editNoteId').value = '';\n      document.getElementById('noteTitleInput').value = '';\n      document.getElementById('noteUserSelect').value = '';\n      document.getElementById('noteCatSelect').value = '';\n      document.getElementById('notePrioritySelect').value = '2';\n      document.getElementById('noteContentInput').value = '';\n\n      document.getElementById('noteFormHeader').textContent = 'Not Girişi';\n      document.getElementById('saveNoteBtn').textContent = 'Notu Kaydet';\n      document.getElementById('cancelNoteBtn').style.display = 'none';\n    }\n\n    // --- SENKRONİZASYON ---\n    async function syncUsers() {\n      try {\n        const res = await fetch(`${API_BASE}/user/sync`, {\n          method: 'POST',\n          headers: { 'Content-Type': 'application/json' },\n          body: JSON.stringify(users)\n        });\n        if (res.ok) {\n          alert('Kullanıcılar senkronize edildi (/user/sync).');\n          await fetchUsers();\n        }\n      } catch (err) {\n        console.error(\"User Sync Hatası:\", err);\n      }\n    }\n\n    async function syncCategories() {\n      try {\n        const res = await fetch(`${API_BASE}/kategori/sync`, {\n          method: 'POST',\n          headers: { 'Content-Type': 'application/json' },\n          body: JSON.stringify(categories)\n        });\n        if (res.ok) {\n          alert('Kategoriler senkronize edildi (/kategori/sync).');\n          await fetchCategories();\n        }\n      } catch (err) {\n        console.error(\"Kategori Sync Hatası:\", err);\n      }\n    }\n\n    async function syncNotes() {\n      try {\n        const res = await fetch(`${API_BASE}/notes/sync`, {\n          method: 'POST',\n          headers: { 'Content-Type': 'application/json' },\n          body: JSON.stringify(notes)\n        });\n        if (res.ok) {\n          alert('Notlar senkronize edildi (/notes/sync).');\n          await fetchTotalNoteCount();\n          await fetchNotes();\n        }\n      } catch (err) {\n        console.error(\"Note Sync Hatası:\", err);\n      }\n    }\n\n    // --- RENDER & FİLTRE ---\n    function applyFilters() {\n      selectedUserFilter = document.getElementById('filterUserSelect').value;\n      renderNotes();\n    }\n\n    function renderUsers() {\n      const list = document.getElementById('userList');\n      const noteUserSelect = document.getElementById('noteUserSelect');\n      const filterUserSelect = document.getElementById('filterUserSelect');\n\n      list.innerHTML = '';\n      noteUserSelect.innerHTML = '<option value=\"\">-- Genel (Atanmamış) --</option>';\n      filterUserSelect.innerHTML = '<option value=\"all\">Tüm Kullanıcılar</option><option value=\"genel\">Yalnızca Genel (Atanmamış)</option>';\n\n      if (users.length === 0) {\n        list.innerHTML = '<li style=\"padding:6px; color:#888;\">Kullanıcı yok.</li>';\n      } else {\n        users.forEach(u => {\n          const userFullName = `${u.isim} ${u.soyisim}`;\n          const li = document.createElement('li');\n          li.className = 'list-item';\n          li.innerHTML = `\n            <span>${userFullName}</span>\n            <div style=\"display:flex; gap:3px;\">\n              <button class=\"btn-small\" onclick=\"editUser('${u._id}')\">Düz</button>\n              <button class=\"btn-small btn-danger\" onclick=\"deleteUser('${u._id}')\">Sil</button>\n            </div>\n          `;\n          list.appendChild(li);\n\n          const opt = document.createElement('option');\n          opt.value = u._id;\n          opt.textContent = userFullName;\n          noteUserSelect.appendChild(opt);\n\n          const filterOpt = document.createElement('option');\n          filterOpt.value = u._id;\n          filterOpt.textContent = userFullName;\n          filterUserSelect.appendChild(filterOpt);\n        });\n      }\n\n      filterUserSelect.value = selectedUserFilter;\n    }\n\n    function renderCategories() {\n      const list = document.getElementById('catList');\n      const select = document.getElementById('noteCatSelect');\n      list.innerHTML = '';\n      select.innerHTML = '<option value=\"\">-- Kategori Seçiniz --</option>';\n\n      const allLi = document.createElement('li');\n      allLi.className = `list-item ${selectedCategoryFilter === 'all' ? 'active' : ''}`;\n      allLi.innerHTML = `<span>Tümü (${totalNoteCount})</span>`;\n      allLi.onclick = () => { selectedCategoryFilter = 'all'; renderNotes(); renderCategories(); };\n      list.appendChild(allLi);\n\n      categories.forEach(cat => {\n        const li = document.createElement('li');\n        li.className = `list-item ${selectedCategoryFilter === cat._id || selectedCategoryFilter === cat.isim ? 'active' : ''}`;\n        li.innerHTML = `\n          <span style=\"flex:1;\">${cat.isim}</span>\n          <div style=\"display: flex; gap: 3px;\">\n            <button class=\"btn-small\" onclick=\"editCategory('${cat._id}', event)\">Düz</button>\n            <button class=\"btn-small btn-danger\" onclick=\"deleteCategory('${cat._id}', event)\">Sil</button>\n          </div>\n        `;\n        li.onclick = (e) => {\n          if (e.target.tagName !== 'BUTTON') {\n            selectedCategoryFilter = cat._id;\n            renderNotes();\n            renderCategories();\n          }\n        };\n        list.appendChild(li);\n\n        const opt = document.createElement('option');\n        opt.value = cat._id;\n        opt.textContent = cat.isim;\n        select.appendChild(opt);\n      });\n    }\n\n    function renderNotes() {\n      const container = document.getElementById('notesContainer');\n      const headerText = document.getElementById('currentViewText');\n      const pageIndicator = document.getElementById('pageIndicator');\n      const pageDetailText = document.getElementById('pageDetailText');\n      const btnPrev = document.getElementById('btnPrevPage');\n      const btnNext = document.getElementById('btnNextPage');\n      \n      container.innerHTML = '';\n\n      let filtered = notes;\n\n      // Kategori Filtresi\n      if (selectedCategoryFilter !== 'all') {\n        filtered = filtered.filter(n => \n          n.kategoriId === selectedCategoryFilter || \n          n.kategori === selectedCategoryFilter ||\n          (categories.find(c => c._id === selectedCategoryFilter)?.isim === n.kategori) ||\n          (categories.find(c => c.isim === selectedCategoryFilter)?._id === n.kategoriId)\n        );\n      }\n\n      // Kullanıcı Filtresi\n      if (selectedUserFilter === 'genel') {\n        filtered = filtered.filter(n => !n.kullanici && !n.kullaniciId);\n      } else if (selectedUserFilter !== 'all') {\n        filtered = filtered.filter(n => \n          n.kullanici === selectedUserFilter || \n          n.kullaniciId === selectedUserFilter\n        );\n      }\n\n      const totalPages = Math.ceil(totalNoteCount / PAGE_LIMIT) || 1;\n\n      headerText.textContent = `Toplam: ${totalNoteCount} | Bu Sayfada: ${filtered.length}`;\n      pageIndicator.textContent = `Sayfa ${currentPage} / ${totalPages}`;\n      \n      const startRecord = totalNoteCount > 0 ? (currentPage - 1) * PAGE_LIMIT + 1 : 0;\n      const endRecord = Math.min(currentPage * PAGE_LIMIT, totalNoteCount);\n      pageDetailText.textContent = totalNoteCount > 0 ? `(Kayıtlar: ${startRecord} - ${endRecord})` : '';\n\n      btnPrev.disabled = currentPage <= 1;\n      btnNext.disabled = currentPage >= totalPages || notes.length < PAGE_LIMIT;\n\n      if (filtered.length === 0) {\n        container.innerHTML = '<div style=\"color: #777; padding: 10px; border: 1px dashed #ccc;\">Gösterilecek not bulunmuyor.</div>';\n        return;\n      }\n\n      filtered.forEach(note => {\n        const dateStr = note.guncellemeTarihi ? new Date(note.guncellemeTarihi).toLocaleString('tr-TR') : '-';\n        const categoryDisplay = getCategoryName(note.kategoriId || note.kategori);\n        const userDisplay = getUserName(note.kullaniciId || note.kullanici);\n        \n        const el = document.createElement('div');\n        el.className = 'note-row';\n        el.innerHTML = `\n          <div class=\"note-top\">\n            <strong>${note.baslik}</strong>\n            <div class=\"note-badges\">\n              <span class=\"note-badge user-badge\">Kullanıcı: ${userDisplay}</span>\n              <span class=\"note-badge\">Öncelik: ${note.oncelik || 2}</span>\n              <span class=\"note-badge\">${categoryDisplay}</span>\n            </div>\n          </div>\n          <div class=\"note-text\">${note.aciklama || ''}</div>\n          <div class=\"note-meta\">Son Güncelleme: ${dateStr}</div>\n          <div class=\"note-bottom\">\n            <button class=\"btn-small\" onclick=\"editNote('${note._id}')\">Düzenle</button>\n            <button class=\"btn-small btn-danger\" onclick=\"deleteNote('${note._id}')\">Sil</button>\n          </div>\n        `;\n        container.appendChild(el);\n      });\n    }\n\n    function render() {\n      renderUsers();\n      renderCategories();\n      renderNotes();\n    }\n\n    async function init() {\n      await fetchTotalNoteCount();\n      await fetchUsers();\n      await fetchCategories();\n      await fetchNotes();\n    }\n\n    init();\n  </script>\n</body>\n</html>",
+        "template": "<!DOCTYPE html>\n<html lang=\"tr\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Yönetim Paneli</title>\n  <style>\n    * {\n      box-sizing: border-box;\n      margin: 0;\n      padding: 0;\n      font-family: Arial, Helvetica, sans-serif;\n      font-size: 13px;\n    }\n\n    body {\n      background: #eee;\n      color: #222;\n      padding: 15px;\n    }\n\n    .app-container {\n      max-width: 1150px;\n      margin: 0 auto;\n      background: #fff;\n      border: 1px solid #ccc;\n      display: flex;\n      flex-direction: column;\n      min-height: 700px;\n    }\n\n    .top-bar {\n      background: #e9ecef;\n      border-bottom: 1px solid #ccc;\n      padding: 8px 15px;\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n    }\n\n    .top-bar-title {\n      font-size: 14px;\n      font-weight: bold;\n      color: #333;\n    }\n\n    .sync-actions {\n      display: flex;\n      gap: 6px;\n    }\n\n    .layout-body {\n      display: flex;\n      flex: 1;\n    }\n\n    .sidebar {\n      width: 280px;\n      border-right: 1px solid #ccc;\n      background: #f7f7f7;\n      padding: 12px;\n      display: flex;\n      flex-direction: column;\n      gap: 12px;\n    }\n\n    .main-content {\n      flex: 1;\n      padding: 15px;\n      display: flex;\n      flex-direction: column;\n      gap: 15px;\n      overflow-y: auto;\n    }\n\n    .section-title {\n      font-size: 13px;\n      font-weight: bold;\n      padding-bottom: 4px;\n      border-bottom: 1px solid #ddd;\n      color: #333;\n      margin-bottom: 8px;\n    }\n\n    .panel-box {\n      border: 1px solid #ddd;\n      background: #fafafa;\n      padding: 10px;\n    }\n\n    .form-group {\n      margin-bottom: 8px;\n    }\n\n    .form-group label {\n      display: block;\n      margin-bottom: 3px;\n      font-weight: bold;\n      color: #444;\n      font-size: 12px;\n    }\n\n    input[type=\"text\"], input[type=\"password\"], select, textarea {\n      width: 100%;\n      border: 1px solid #aaa;\n      padding: 5px 6px;\n      background: #fff;\n      color: #000;\n    }\n\n    input:focus, select:focus, textarea:focus {\n      border-color: #555;\n      outline: none;\n    }\n\n    button {\n      padding: 5px 10px;\n      background: #e1e1e1;\n      border: 1px solid #adadad;\n      color: #000;\n      cursor: pointer;\n    }\n\n    button:hover {\n      background: #d4d4d4;\n      border-color: #888;\n    }\n\n    button:disabled {\n      opacity: 0.4;\n      cursor: not-allowed;\n    }\n\n    .btn-small {\n      padding: 2px 6px;\n      font-size: 11px;\n    }\n\n    .btn-sync {\n      background: #d9e6f2;\n      border-color: #9cbacf;\n      font-weight: bold;\n    }\n\n    .btn-sync:hover {\n      background: #c3d7ea;\n    }\n\n    .btn-danger {\n      color: #900;\n    }\n\n    .list-box {\n      list-style: none;\n      border: 1px solid #ddd;\n      background: #fff;\n      max-height: 180px;\n      overflow-y: auto;\n    }\n\n    .list-item {\n      padding: 6px 8px;\n      border-bottom: 1px solid #eee;\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      cursor: pointer;\n    }\n\n    .list-item:hover {\n      background: #f0f0f0;\n    }\n\n    .list-item.active {\n      background: #d9e6f2;\n      font-weight: bold;\n    }\n\n    .filter-bar {\n      display: flex;\n      gap: 10px;\n      align-items: center;\n      background: #fdfdfd;\n      border: 1px solid #ddd;\n      padding: 6px 10px;\n    }\n\n    .notes-list {\n      display: flex;\n      flex-direction: column;\n      gap: 10px;\n    }\n\n    .note-row {\n      border: 1px solid #ccc;\n      background: #fff;\n      padding: 10px;\n    }\n\n    .note-top {\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      background: #f4f4f4;\n      padding: 4px 8px;\n      border-bottom: 1px solid #e5e5e5;\n      margin: -10px -10px 8px -10px;\n    }\n\n    .note-badges {\n      display: flex;\n      gap: 4px;\n    }\n\n    .note-badge {\n      font-size: 11px;\n      background: #e2e2e2;\n      border: 1px solid #ccc;\n      padding: 1px 5px;\n    }\n\n    .note-badge.user-badge {\n      background: #e8f4fd;\n      border-color: #bcdffb;\n      color: #0b5394;\n      font-weight: bold;\n    }\n\n    .note-meta {\n      font-size: 11px;\n      color: #666;\n      margin-top: 6px;\n    }\n\n    .note-text {\n      color: #333;\n      line-height: 1.4;\n      white-space: pre-wrap;\n    }\n\n    .note-bottom {\n      margin-top: 8px;\n      text-align: right;\n    }\n\n    .pagination-wrapper {\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      background: #fdfdfd;\n      border: 1px solid #ddd;\n      padding: 8px 12px;\n      margin-top: 12px;\n    }\n\n    .pagination-actions {\n      display: flex;\n      gap: 6px;\n      align-items: center;\n    }\n\n    .page-indicator {\n      font-weight: bold;\n      color: #444;\n    }\n  </style>\n</head>\n<body>\n<div id=\"loginOverlay\" style=\"position:fixed;inset:0;background:#eee;display:flex;\n     align-items:center;justify-content:center;z-index:9999;\">\n  <div class=\"panel-box\" style=\"width:320px;\">\n    <div class=\"section-title\">Yönetim Paneli Girişi</div>\n    <div class=\"form-group\"><label>Kullanıcı Adı</label><input type=\"text\" id=\"loginKa\"></div>\n    <div class=\"form-group\"><label>Şifre</label><input type=\"password\" id=\"loginSifre\"></div>\n    <button onclick=\"panelGiris()\">Giriş</button>\n    <div id=\"loginHata\" style=\"color:#900;margin-top:8px;\"></div>\n  </div>\n</div>\n\n  <div class=\"app-container\">\n    \n    <!-- ÜST BAR: SENKRONİZASYON -->\n    <div class=\"top-bar\">\n      <div class=\"top-bar-title\">Yönetim & Senkronizasyon Konsolu</div>\n      <div class=\"sync-actions\">\n        <button class=\"btn-sync\" onclick=\"syncUsers()\">Kullanıcıları Senkronize Et (/user/sync)</button>\n        <button class=\"btn-sync\" onclick=\"syncCategories()\">Kategorileri Senkronize Et (/kategori/sync)</button>\n        <button class=\"btn-sync\" onclick=\"syncNotes()\">Notları Senkronize Et (/notes/sync)</button>\n        <button onclick=\"panelCikis()\">Çıkış</button>\n      </div>\n    </div>\n\n    <div class=\"layout-body\">\n      \n      <!-- SOL PANEL: KULLANICILAR & KATEGORİLER -->\n      <div class=\"sidebar\">\n        \n        <!-- KULLANICI YÖNETİMİ -->\n        <div>\n          <div class=\"section-title\">Kullanıcı Tanımlama</div>\n          <div class=\"panel-box\">\n            <input type=\"hidden\" id=\"editUserId\">\n            \n            <div class=\"form-group\">\n              <input type=\"text\" id=\"userKullaniciAdi\" placeholder=\"Kullanıcı Adı (*)\">\n            </div>\n            <div class=\"form-group\">\n              <input type=\"text\" id=\"userIsim\" placeholder=\"İsim (*)\">\n            </div>\n            <div class=\"form-group\">\n              <input type=\"text\" id=\"userSoyisim\" placeholder=\"Soyisim (*)\">\n            </div>\n            <div class=\"form-group\">\n              <input type=\"password\" id=\"userSifre\" placeholder=\"Şifre (yeni kullanıcıda zorunlu)\">\n            </div>\n            <div class=\"form-group\">\n              <select id=\"userRol\">\n                <option value=\"kullanici\">Kullanıcı</option>\n                <option value=\"admin\">Admin</option>\n              </select>\n            </div>\n\n            <div style=\"display: flex; gap: 4px;\">\n              <button id=\"saveUserBtn\" onclick=\"saveUser()\">Kaydet</button>\n              <button id=\"cancelUserBtn\" style=\"display:none;\" onclick=\"resetUserForm()\">İptal</button>\n            </div>\n          </div>\n\n          <div style=\"margin-top: 6px; font-weight: bold; font-size: 11px;\">Kullanıcı Listesi:</div>\n          <ul class=\"list-box\" id=\"userList\" style=\"margin-top: 4px;\"></ul>\n        </div>\n\n        <!-- KATEGORİ YÖNETİMİ -->\n        <div>\n          <div class=\"section-title\">Kategoriler</div>\n          <div class=\"panel-box\">\n            <input type=\"hidden\" id=\"editCatId\">\n            <div class=\"form-group\">\n              <input type=\"text\" id=\"catNameInput\" placeholder=\"Kategori Adı (*)\">\n            </div>\n            <div style=\"display: flex; gap: 4px;\">\n              <button id=\"saveCatBtn\" onclick=\"saveCategory()\">Ekle</button>\n              <button id=\"cancelCatBtn\" style=\"display:none;\" onclick=\"resetCategoryForm()\">İptal</button>\n            </div>\n          </div>\n\n          <ul class=\"list-box\" id=\"catList\" style=\"margin-top: 8px;\"></ul>\n        </div>\n\n      </div>\n\n      <!-- SAĞ PANEL: NOTLAR -->\n      <div class=\"main-content\">\n        \n        <!-- Not Form Alanı -->\n        <div class=\"panel-box\">\n          <div class=\"section-title\" id=\"noteFormHeader\">Not Girişi</div>\n          <input type=\"hidden\" id=\"editNoteId\">\n          \n          <div style=\"display: flex; gap: 8px; margin-bottom: 8px;\">\n            <div style=\"flex: 2;\">\n              <label>Başlık (*):</label>\n              <input type=\"text\" id=\"noteTitleInput\">\n            </div>\n            <div style=\"flex: 1.2;\">\n              <label>Atanan Kullanıcı:</label>\n              <select id=\"noteUserSelect\"></select>\n            </div>\n            <div style=\"flex: 1;\">\n              <label>Kategori:</label>\n              <select id=\"noteCatSelect\"></select>\n            </div>\n            <div style=\"flex: 0.8;\">\n              <label>Öncelik:</label>\n              <select id=\"notePrioritySelect\">\n                <option value=\"1\">1 - Düşük</option>\n                <option value=\"2\" selected>2 - Normal</option>\n                <option value=\"3\">3 - Yüksek</option>\n              </select>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <label>Açıklama:</label>\n            <textarea id=\"noteContentInput\" rows=\"3\"></textarea>\n          </div>\n\n          <div style=\"display: flex; gap: 6px;\">\n            <button id=\"saveNoteBtn\" onclick=\"saveNote()\">Notu Kaydet</button>\n            <button id=\"cancelNoteBtn\" style=\"display:none;\" onclick=\"resetNoteForm()\">İptal</button>\n          </div>\n        </div>\n\n        <!-- Not Filtreleme & Liste Alanı -->\n        <div>\n          <div class=\"filter-bar\">\n            <strong>Filtrele:</strong>\n            <label>Kullanıcı:</label>\n            <select id=\"filterUserSelect\" onchange=\"applyFilters()\" style=\"width: auto;\"></select>\n            <span id=\"currentViewText\" style=\"margin-left: auto; color: #555; font-weight: bold;\"></span>\n          </div>\n\n          <div class=\"notes-list\" id=\"notesContainer\" style=\"margin-top: 10px;\"></div>\n\n          <!-- Sayfalama Kontrolleri -->\n          <div class=\"pagination-wrapper\">\n            <span class=\"page-indicator\" id=\"pageIndicator\">Sayfa: 1 / 1</span>\n            <div class=\"pagination-actions\">\n              <button id=\"btnPrevPage\" onclick=\"changePage(-1)\">&laquo; Önceki</button>\n              <span id=\"pageDetailText\" style=\"color: #666; font-size: 11px;\"></span>\n              <button id=\"btnNextPage\" onclick=\"changePage(1)\">Sonraki &raquo;</button>\n            </div>\n          </div>\n        </div>\n\n      </div>\n\n    </div>\n\n  </div>\n\n  <script>\n    const currentHost = window.location.hostname || '127.0.0.1';\n    const API_BASE = `http://${currentHost}:1880`;\n\n    let TOKEN = localStorage.getItem('pn_token') || '';\n    let ROL = localStorage.getItem('pn_rol') || '';\n\n    async function panelGiris() {\n      try {\n        const res = await fetch(`${API_BASE}/login`, {\n          method: 'POST',\n          headers: { 'Content-Type': 'application/json' },\n          body: JSON.stringify({\n            kullaniciAdi: document.getElementById('loginKa').value.trim(),\n            sifre: document.getElementById('loginSifre').value\n          })\n        });\n\n        if (!res.ok) {\n          document.getElementById('loginHata').textContent = 'Kullanıcı adı veya şifre hatalı.';\n          return;\n        }\n\n        const data = await res.json();\n\n        if (data.kullanici.rol !== 'admin') {\n          document.getElementById('loginHata').textContent = 'Bu panele sadece admin girebilir.';\n          return;\n        }\n\n        TOKEN = data.token;\n        ROL = data.kullanici.rol;\n        localStorage.setItem('pn_token', TOKEN);\n        localStorage.setItem('pn_rol', ROL);\n        document.getElementById('loginOverlay').style.display = 'none';\n        await init();\n      } catch (err) {\n        console.error(\"Giriş hatası:\", err);\n        document.getElementById('loginHata').textContent = 'Sunucuya bağlanılamadı.';\n      }\n    }\n\n    function panelCikis() {\n      localStorage.removeItem('pn_token');\n      localStorage.removeItem('pn_rol');\n      location.reload();\n    }\n\n    async function api(path, options) {\n      const ayar = options || {};\n      ayar.headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` };\n\n      const res = await fetch(`${API_BASE}${path}`, ayar);\n\n      if (res.status === 401 || res.status === 403) {\n        panelCikis();\n        throw new Error('Yetkisiz istek');\n      }\n\n      return res;\n    }\n\n    let users = [];\n    let categories = [];\n    let notes = [];\n    let totalNoteCount = 0;\n\n    let selectedCategoryFilter = 'all';\n    let selectedUserFilter = 'all';\n\n    let currentPage = 1;\n    const PAGE_LIMIT = 10;\n\n    function getCategoryName(catVal) {\n      if (!catVal) return 'Kategorisiz';\n      const found = categories.find(c => c._id === catVal || c.isim === catVal);\n      return found ? found.isim : catVal;\n    }\n\n    function getUserName(userVal) {\n      if (!userVal) return 'Genel';\n      const found = users.find(u => u._id === userVal || `${u.isim} ${u.soyisim}` === userVal);\n      return found ? `${found.isim} ${found.soyisim}` : userVal;\n    }\n\n    // --- TOPLAM NOT SAYISI API İŞLEMİ ---\n   async function fetchTotalNoteCount() {\n  try {\n    const res = await api(`/notsayisi`);\n    if (res.ok) {\n      const data = await res.json();\n      \n      if (typeof data === 'number') {\n        totalNoteCount = data;\n      } else if (data && typeof data === 'object') {\n        totalNoteCount = data.count ?? data.total ?? 0;\n      } else {\n        totalNoteCount = Number(data) || 0;\n      }\n\n      renderCategories();\n      renderNotes();\n    }\n  } catch (err) {\n    console.error(\"Not sayısı alınamadı:\", err);\n  }\n}\n\n    // --- KULLANICI API İŞLEMLERİ ---\n    async function fetchUsers() {\n      try {\n        const res = await api(`/user`);\n        if (res.ok) {\n          const data = await res.json();\n          users = Array.isArray(data) ? data.filter(u => !u.silindiMi) : [];\n          renderUsers();\n        }\n      } catch (err) {\n        console.error(\"Kullanıcılar getirilemedi:\", err);\n      }\n    }\n\n    async function saveUser() {\n      const isim = document.getElementById('userIsim').value.trim();\n      const soyisim = document.getElementById('userSoyisim').value.trim();\n      const sifre = document.getElementById('userSifre').value.trim();\n      const editId = document.getElementById('editUserId').value;\n\n      const kullaniciAdi = document.getElementById('userKullaniciAdi').value.trim();\n      const rol = document.getElementById('userRol').value;\n\n      if (!kullaniciAdi || !isim || !soyisim) {\n        alert('Kullanıcı adı, isim ve soyisim bilgileri zorunludur.');\n        return;\n      }\n\n      if (!editId && !sifre) {\n        alert('Yeni kullanıcı için şifre zorunludur.');\n        return;\n      }\n\n      const userPayload = {\n        _id: editId || Date.now().toString(),\n        kullaniciAdi: kullaniciAdi,\n        isim: isim,\n        soyisim: soyisim,\n        sifre: sifre,\n        rol: rol,\n        silindiMi: false,\n        guncellemeTarihi: Date.now()\n      };\n\n      try {\n        let res;\n        if (editId) {\n          res = await api(`/userDuzenle/${editId}`, {\n            method: 'PUT',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(userPayload)\n          });\n        } else {\n          res = await api(`/userEkle`, {\n            method: 'POST',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(userPayload)\n          });\n        }\n\n        if (res.ok) {\n          resetUserForm();\n          await fetchUsers();\n        } else {\n          const err = await res.json();\n          alert('Kullanıcı kaydedilemedi: ' + (err.hata || 'Sunucu hatası'));\n        }\n      } catch (err) {\n        console.error(\"User Post/Put Hatası:\", err);\n      }\n    }\n\n    async function deleteUser(id) {\n      if (!confirm('Kullanıcı silinsin mi?')) return;\n\n      try {\n        const res = await api(`/user/${id}`, { method: 'DELETE' });\n        if (res.ok) await fetchUsers();\n      } catch (err) {\n        console.error(\"Kullanıcı silme hatası:\", err);\n      }\n    }\n\n    function editUser(id) {\n      const u = users.find(x => x._id === id);\n      if (!u) return;\n\n      document.getElementById('editUserId').value = u._id;\n      document.getElementById('userKullaniciAdi').value = u.kullaniciAdi || '';\n      document.getElementById('userIsim').value = u.isim || '';\n      document.getElementById('userSoyisim').value = u.soyisim || '';\n      document.getElementById('userRol').value = u.rol || 'kullanici';\n      document.getElementById('userSifre').value = '';\n\n      document.getElementById('saveUserBtn').textContent = 'Güncelle';\n      document.getElementById('cancelUserBtn').style.display = 'inline-block';\n    }\n\n    function resetUserForm() {\n      document.getElementById('editUserId').value = '';\n      document.getElementById('userKullaniciAdi').value = '';\n      document.getElementById('userIsim').value = '';\n      document.getElementById('userSoyisim').value = '';\n      document.getElementById('userRol').value = 'kullanici';\n      document.getElementById('userSifre').value = '';\n\n      document.getElementById('saveUserBtn').textContent = 'Kaydet';\n      document.getElementById('cancelUserBtn').style.display = 'none';\n    }\n\n    // --- KATEGORİ API İŞLEMLERİ ---\n    async function fetchCategories() {\n      try {\n        const res = await api(`/kategori`);\n        if (res.ok) {\n          const data = await res.json();\n          categories = Array.isArray(data) ? data.filter(c => !c.silindiMi) : [];\n          renderCategories();\n        }\n      } catch (err) {\n        console.error(\"Kategoriler alınamadı:\", err);\n      }\n    }\n\n    async function saveCategory() {\n      const isim = document.getElementById('catNameInput').value.trim();\n      const editId = document.getElementById('editCatId').value;\n\n      if (!isim) {\n        alert('Kategori ismi boş bırakılamaz.');\n        return;\n      }\n\n      const payload = {\n        _id: editId || Date.now().toString(),\n        isim: isim,\n        silindiMi: false,\n        guncellemeTarihi: Date.now()\n      };\n\n      try {\n        let res;\n        if (editId) {\n          res = await api(`/kategoriDuzenle/${editId}`, {\n            method: 'PUT',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(payload)\n          });\n        } else {\n          res = await api(`/kategoriEkle`, {\n            method: 'POST',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(payload)\n          });\n        }\n\n        if (res.ok) {\n          resetCategoryForm();\n          await fetchCategories();\n        } else {\n          const err = await res.json();\n          alert('Hata: ' + (err.hata || 'Kategori kaydedilemedi.'));\n        }\n      } catch (err) {\n        console.error(\"Kategori kaydetme hatası:\", err);\n      }\n    }\n\n    async function deleteCategory(id, e) {\n      e.stopPropagation();\n      if (!confirm('Bu kategoriyi silmek istiyor musunuz?')) return;\n\n      try {\n        const res = await api(`/kategori/${id}`, { method: 'DELETE' });\n        if (res.ok) {\n          if (selectedCategoryFilter === id) selectedCategoryFilter = 'all';\n          await fetchCategories();\n        }\n      } catch (err) {\n        console.error(\"Kategori silme hatası:\", err);\n      }\n    }\n\n    function editCategory(id, e) {\n      e.stopPropagation();\n      const cat = categories.find(c => c._id === id);\n      if (!cat) return;\n\n      document.getElementById('editCatId').value = cat._id;\n      document.getElementById('catNameInput').value = cat.isim || '';\n      document.getElementById('saveCatBtn').textContent = 'Güncelle';\n      document.getElementById('cancelCatBtn').style.display = 'inline-block';\n    }\n\n    function resetCategoryForm() {\n      document.getElementById('editCatId').value = '';\n      document.getElementById('catNameInput').value = '';\n      document.getElementById('saveCatBtn').textContent = 'Ekle';\n      document.getElementById('cancelCatBtn').style.display = 'none';\n    }\n\n    // --- NOT API İŞLEMLERİ ---\n    async function fetchNotes() {\n      try {\n        const res = await api(`/notes?page=${currentPage}`);\n        if (res.ok) {\n          const data = await res.json();\n          notes = Array.isArray(data) ? data.filter(n => !n.silindiMi) : [];\n          render();\n        }\n      } catch (err) {\n        console.error(\"Notlar alınamadı:\", err);\n      }\n    }\n\n    async function changePage(direction) {\n      const totalPages = Math.ceil(totalNoteCount / PAGE_LIMIT) || 1;\n      const targetPage = currentPage + direction;\n      if (targetPage < 1 || targetPage > totalPages) return;\n      currentPage = targetPage;\n      await fetchNotes();\n    }\n\n    async function saveNote() {\n      const baslik = document.getElementById('noteTitleInput').value.trim();\n      const selectedCatVal = document.getElementById('noteCatSelect').value;\n      const selectedUserVal = document.getElementById('noteUserSelect').value;\n      const aciklama = document.getElementById('noteContentInput').value.trim();\n      const oncelik = parseInt(document.getElementById('notePrioritySelect').value, 10);\n      const editId = document.getElementById('editNoteId').value;\n\n      if (!baslik) {\n        alert('Başlık alanı zorunludur.');\n        return;\n      }\n\n      const targetNoteId = editId || Date.now().toString();\n\n      const foundCat = categories.find(c => c._id === selectedCatVal || c.isim === selectedCatVal);\n      const foundUser = users.find(u => u._id === selectedUserVal || `${u.isim} ${u.soyisim}` === selectedUserVal);\n\n      const payload = {\n        _id: targetNoteId,\n        baslik: baslik,\n        aciklama: aciklama || \"\",\n        oncelik: oncelik || 2,\n        silindiMi: false,\n        kategoriId: foundCat ? foundCat._id : (selectedCatVal || \"\"),\n        kategori: foundCat ? foundCat.isim : (selectedCatVal || \"\"),\n        kullaniciId: selectedUserVal ? (foundUser ? foundUser._id : selectedUserVal) : null,\n        kullanici: selectedUserVal ? (foundUser ? `${foundUser.isim} ${foundUser.soyisim}` : selectedUserVal) : null,\n        guncellemeTarihi: Date.now()\n      };\n\n      try {\n        let res;\n        if (editId) {\n          res = await api(`/note/${editId}`, {\n            method: 'PUT',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(payload)\n          });\n        } else {\n          res = await api(`/note`, {\n            method: 'POST',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify(payload)\n          });\n        }\n\n        if (res.ok) {\n          resetNoteForm();\n          await fetchTotalNoteCount();\n          await fetchNotes();\n        } else {\n          const err = await res.json();\n          alert('Hata: ' + (err.hata || 'Not kaydedilemedi.'));\n        }\n      } catch (err) {\n        console.error(\"Not kaydetme hatası:\", err);\n      }\n    }\n\n    async function deleteNote(id) {\n      if (!confirm('Bu notu silmek istiyor musunuz?')) return;\n\n      try {\n        const res = await api(`/note/${id}`, { method: 'DELETE' });\n        if (res.ok) {\n          await fetchTotalNoteCount();\n          await fetchNotes();\n        }\n      } catch (err) {\n        console.error(\"Not silme hatası:\", err);\n      }\n    }\n\n    function editNote(id) {\n      const note = notes.find(n => n._id === id);\n      if (!note) return;\n\n      document.getElementById('editNoteId').value = note._id;\n      document.getElementById('noteTitleInput').value = note.baslik || '';\n      document.getElementById('noteUserSelect').value = note.kullaniciId || note.kullanici || '';\n      document.getElementById('noteCatSelect').value = note.kategoriId || note.kategori || '';\n      document.getElementById('notePrioritySelect').value = note.oncelik || 2;\n      document.getElementById('noteContentInput').value = note.aciklama || '';\n\n      document.getElementById('noteFormHeader').textContent = 'Notu Düzenle';\n      document.getElementById('saveNoteBtn').textContent = 'Güncelle';\n      document.getElementById('cancelNoteBtn').style.display = 'inline-block';\n    }\n\n    function resetNoteForm() {\n      document.getElementById('editNoteId').value = '';\n      document.getElementById('noteTitleInput').value = '';\n      document.getElementById('noteUserSelect').value = '';\n      document.getElementById('noteCatSelect').value = '';\n      document.getElementById('notePrioritySelect').value = '2';\n      document.getElementById('noteContentInput').value = '';\n\n      document.getElementById('noteFormHeader').textContent = 'Not Girişi';\n      document.getElementById('saveNoteBtn').textContent = 'Notu Kaydet';\n      document.getElementById('cancelNoteBtn').style.display = 'none';\n    }\n\n    // --- SENKRONİZASYON ---\n    async function syncUsers() {\n      try {\n        const res = await api(`/user/sync`, {\n          method: 'POST',\n          headers: { 'Content-Type': 'application/json' },\n          body: JSON.stringify(users)\n        });\n        if (res.ok) {\n          alert('Kullanıcılar senkronize edildi (/user/sync).');\n          await fetchUsers();\n        }\n      } catch (err) {\n        console.error(\"User Sync Hatası:\", err);\n      }\n    }\n\n    async function syncCategories() {\n      try {\n        const res = await api(`/kategori/sync`, {\n          method: 'POST',\n          headers: { 'Content-Type': 'application/json' },\n          body: JSON.stringify(categories)\n        });\n        if (res.ok) {\n          alert('Kategoriler senkronize edildi (/kategori/sync).');\n          await fetchCategories();\n        }\n      } catch (err) {\n        console.error(\"Kategori Sync Hatası:\", err);\n      }\n    }\n\n    async function syncNotes() {\n      try {\n        const res = await api(`/notes/sync`, {\n          method: 'POST',\n          headers: { 'Content-Type': 'application/json' },\n          body: JSON.stringify(notes)\n        });\n        if (res.ok) {\n          alert('Notlar senkronize edildi (/notes/sync).');\n          await fetchTotalNoteCount();\n          await fetchNotes();\n        }\n      } catch (err) {\n        console.error(\"Note Sync Hatası:\", err);\n      }\n    }\n\n    // --- RENDER & FİLTRE ---\n    function applyFilters() {\n      selectedUserFilter = document.getElementById('filterUserSelect').value;\n      renderNotes();\n    }\n\n    function renderUsers() {\n      const list = document.getElementById('userList');\n      const noteUserSelect = document.getElementById('noteUserSelect');\n      const filterUserSelect = document.getElementById('filterUserSelect');\n\n      list.innerHTML = '';\n      noteUserSelect.innerHTML = '<option value=\"\">-- Genel (Atanmamış) --</option>';\n      filterUserSelect.innerHTML = '<option value=\"all\">Tüm Kullanıcılar</option><option value=\"genel\">Yalnızca Genel (Atanmamış)</option>';\n\n      if (users.length === 0) {\n        list.innerHTML = '<li style=\"padding:6px; color:#888;\">Kullanıcı yok.</li>';\n      } else {\n        users.forEach(u => {\n          const userFullName = `${u.isim} ${u.soyisim}`;\n          const li = document.createElement('li');\n          li.className = 'list-item';\n          li.innerHTML = `\n            <span>${userFullName}</span>\n            <div style=\"display:flex; gap:3px;\">\n              <button class=\"btn-small\" onclick=\"editUser('${u._id}')\">Düz</button>\n              <button class=\"btn-small btn-danger\" onclick=\"deleteUser('${u._id}')\">Sil</button>\n            </div>\n          `;\n          list.appendChild(li);\n\n          const opt = document.createElement('option');\n          opt.value = u._id;\n          opt.textContent = userFullName;\n          noteUserSelect.appendChild(opt);\n\n          const filterOpt = document.createElement('option');\n          filterOpt.value = u._id;\n          filterOpt.textContent = userFullName;\n          filterUserSelect.appendChild(filterOpt);\n        });\n      }\n\n      filterUserSelect.value = selectedUserFilter;\n    }\n\n    function renderCategories() {\n      const list = document.getElementById('catList');\n      const select = document.getElementById('noteCatSelect');\n      list.innerHTML = '';\n      select.innerHTML = '<option value=\"\">-- Kategori Seçiniz --</option>';\n\n      const allLi = document.createElement('li');\n      allLi.className = `list-item ${selectedCategoryFilter === 'all' ? 'active' : ''}`;\n      allLi.innerHTML = `<span>Tümü (${totalNoteCount})</span>`;\n      allLi.onclick = () => { selectedCategoryFilter = 'all'; renderNotes(); renderCategories(); };\n      list.appendChild(allLi);\n\n      categories.forEach(cat => {\n        const li = document.createElement('li');\n        li.className = `list-item ${selectedCategoryFilter === cat._id || selectedCategoryFilter === cat.isim ? 'active' : ''}`;\n        li.innerHTML = `\n          <span style=\"flex:1;\">${cat.isim}</span>\n          <div style=\"display: flex; gap: 3px;\">\n            <button class=\"btn-small\" onclick=\"editCategory('${cat._id}', event)\">Düz</button>\n            <button class=\"btn-small btn-danger\" onclick=\"deleteCategory('${cat._id}', event)\">Sil</button>\n          </div>\n        `;\n        li.onclick = (e) => {\n          if (e.target.tagName !== 'BUTTON') {\n            selectedCategoryFilter = cat._id;\n            renderNotes();\n            renderCategories();\n          }\n        };\n        list.appendChild(li);\n\n        const opt = document.createElement('option');\n        opt.value = cat._id;\n        opt.textContent = cat.isim;\n        select.appendChild(opt);\n      });\n    }\n\n    function renderNotes() {\n      const container = document.getElementById('notesContainer');\n      const headerText = document.getElementById('currentViewText');\n      const pageIndicator = document.getElementById('pageIndicator');\n      const pageDetailText = document.getElementById('pageDetailText');\n      const btnPrev = document.getElementById('btnPrevPage');\n      const btnNext = document.getElementById('btnNextPage');\n      \n      container.innerHTML = '';\n\n      let filtered = notes;\n\n      // Kategori Filtresi\n      if (selectedCategoryFilter !== 'all') {\n        filtered = filtered.filter(n => \n          n.kategoriId === selectedCategoryFilter || \n          n.kategori === selectedCategoryFilter ||\n          (categories.find(c => c._id === selectedCategoryFilter)?.isim === n.kategori) ||\n          (categories.find(c => c.isim === selectedCategoryFilter)?._id === n.kategoriId)\n        );\n      }\n\n      // Kullanıcı Filtresi\n      if (selectedUserFilter === 'genel') {\n        filtered = filtered.filter(n => !n.kullanici && !n.kullaniciId);\n      } else if (selectedUserFilter !== 'all') {\n        filtered = filtered.filter(n => \n          n.kullanici === selectedUserFilter || \n          n.kullaniciId === selectedUserFilter\n        );\n      }\n\n      const totalPages = Math.ceil(totalNoteCount / PAGE_LIMIT) || 1;\n\n      headerText.textContent = `Toplam: ${totalNoteCount} | Bu Sayfada: ${filtered.length}`;\n      pageIndicator.textContent = `Sayfa ${currentPage} / ${totalPages}`;\n      \n      const startRecord = totalNoteCount > 0 ? (currentPage - 1) * PAGE_LIMIT + 1 : 0;\n      const endRecord = Math.min(currentPage * PAGE_LIMIT, totalNoteCount);\n      pageDetailText.textContent = totalNoteCount > 0 ? `(Kayıtlar: ${startRecord} - ${endRecord})` : '';\n\n      btnPrev.disabled = currentPage <= 1;\n      btnNext.disabled = currentPage >= totalPages || notes.length < PAGE_LIMIT;\n\n      if (filtered.length === 0) {\n        container.innerHTML = '<div style=\"color: #777; padding: 10px; border: 1px dashed #ccc;\">Gösterilecek not bulunmuyor.</div>';\n        return;\n      }\n\n      filtered.forEach(note => {\n        const dateStr = note.guncellemeTarihi ? new Date(note.guncellemeTarihi).toLocaleString('tr-TR') : '-';\n        const categoryDisplay = getCategoryName(note.kategoriId || note.kategori);\n        const userDisplay = getUserName(note.kullaniciId || note.kullanici);\n        \n        const el = document.createElement('div');\n        el.className = 'note-row';\n        el.innerHTML = `\n          <div class=\"note-top\">\n            <strong>${note.baslik}</strong>\n            <div class=\"note-badges\">\n              <span class=\"note-badge user-badge\">Kullanıcı: ${userDisplay}</span>\n              <span class=\"note-badge\">Öncelik: ${note.oncelik || 2}</span>\n              <span class=\"note-badge\">${categoryDisplay}</span>\n            </div>\n          </div>\n          <div class=\"note-text\">${note.aciklama || ''}</div>\n          <div class=\"note-meta\">Son Güncelleme: ${dateStr}</div>\n          <div class=\"note-bottom\">\n            <button class=\"btn-small\" onclick=\"editNote('${note._id}')\">Düzenle</button>\n            <button class=\"btn-small btn-danger\" onclick=\"deleteNote('${note._id}')\">Sil</button>\n          </div>\n        `;\n        container.appendChild(el);\n      });\n    }\n\n    function render() {\n      renderUsers();\n      renderCategories();\n      renderNotes();\n    }\n\n    async function init() {\n      await fetchTotalNoteCount();\n      await fetchUsers();\n      await fetchCategories();\n      await fetchNotes();\n    }\n\n    window.addEventListener('DOMContentLoaded', () => {\n      if (TOKEN && ROL === 'admin') {\n        document.getElementById('loginOverlay').style.display = 'none';\n        init();\n      }\n    });\n  </script>\n</body>\n</html>",
         "output": "str",
-        "x": 670,
+        "x": 590,
         "y": 340,
         "wires": [
             [
@@ -3026,11 +3681,11 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 340,
+        "x": 280,
         "y": 280,
         "wires": [
             [
-                "5e6fb2543bbca3c6"
+                "7173fd6b24fcddd3"
             ]
         ]
     },
@@ -3101,7 +3756,7 @@
         "type": "subflow:59b03ea7b921cbf5",
         "z": "809d1653626c3638",
         "name": "",
-        "x": 690,
+        "x": 750,
         "y": 280,
         "wires": [
             [
@@ -3143,6 +3798,19 @@
         "wires": []
     },
     {
+        "id": "7173fd6b24fcddd3",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "809d1653626c3638",
+        "name": "",
+        "x": 510,
+        "y": 280,
+        "wires": [
+            [
+                "5e6fb2543bbca3c6"
+            ]
+        ]
+    },
+    {
         "id": "e74bfa874052050b",
         "type": "http in",
         "z": "b0334dec5b227c98",
@@ -3152,11 +3820,11 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 330,
+        "x": 270,
         "y": 360,
         "wires": [
             [
-                "08b6e5fbe807df12"
+                "b4b162975c438547"
             ]
         ]
     },
@@ -3199,7 +3867,7 @@
         "type": "subflow:9aded7e507b9fa04",
         "z": "b0334dec5b227c98",
         "name": "",
-        "x": 690,
+        "x": 790,
         "y": 360,
         "wires": [
             [
@@ -3228,6 +3896,19 @@
         "wires": []
     },
     {
+        "id": "b4b162975c438547",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "b0334dec5b227c98",
+        "name": "",
+        "x": 530,
+        "y": 360,
+        "wires": [
+            [
+                "08b6e5fbe807df12"
+            ]
+        ]
+    },
+    {
         "id": "5ccf7d69bf0c8861",
         "type": "http in",
         "z": "cf3659ba771d5d60",
@@ -3237,11 +3918,11 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 280,
-        "y": 360,
+        "x": 300,
+        "y": 340,
         "wires": [
             [
-                "1ccb4cc9f72c8be7"
+                "aa11000000000004"
             ]
         ]
     },
@@ -3252,8 +3933,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 930,
-        "y": 360,
+        "x": 1130,
+        "y": 340,
         "wires": []
     },
     {
@@ -3261,8 +3942,8 @@
         "type": "subflow:c56e099c537a8400",
         "z": "cf3659ba771d5d60",
         "name": "",
-        "x": 630,
-        "y": 360,
+        "x": 950,
+        "y": 340,
         "wires": [
             [
                 "f8c95f51637fdb86"
@@ -3286,8 +3967,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 460,
-        "y": 500,
+        "x": 500,
+        "y": 480,
         "wires": [
             [
                 "be9aa8731c641792"
@@ -3299,8 +3980,8 @@
         "type": "subflow:9d02acee60b44bb6",
         "z": "cf3659ba771d5d60",
         "name": "",
-        "x": 810,
-        "y": 500,
+        "x": 950,
+        "y": 480,
         "wires": []
     },
     {
@@ -3308,8 +3989,142 @@
         "type": "subflow:4a93125aa43535f1",
         "z": "cf3659ba771d5d60",
         "name": "",
-        "x": 640,
-        "y": 260,
+        "x": 720,
+        "y": 240,
         "wires": []
+    },
+    {
+        "id": "aa11000000000004",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "cf3659ba771d5d60",
+        "name": "",
+        "x": 510,
+        "y": 340,
+        "wires": [
+            [
+                "aa11000000000005"
+            ]
+        ]
+    },
+    {
+        "id": "aa11000000000005",
+        "type": "subflow:93a0de60e9c91ce6",
+        "z": "cf3659ba771d5d60",
+        "name": "",
+        "x": 720,
+        "y": 340,
+        "wires": [
+            [
+                "1ccb4cc9f72c8be7"
+            ]
+        ]
+    },
+    {
+        "id": "4f8f5475bef7b4d6",
+        "type": "http in",
+        "z": "7ac945370c3f7079",
+        "name": "",
+        "url": "/login",
+        "method": "post",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 330,
+        "y": 360,
+        "wires": [
+            [
+                "ecbb484ba49ec2f0"
+            ]
+        ]
+    },
+    {
+        "id": "820adb20a1985c70",
+        "type": "http response",
+        "z": "7ac945370c3f7079",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 990,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "ecbb484ba49ec2f0",
+        "type": "subflow:c9c1757596cdb4ff",
+        "z": "7ac945370c3f7079",
+        "name": "",
+        "x": 680,
+        "y": 360,
+        "wires": [
+            [
+                "820adb20a1985c70"
+            ]
+        ]
+    },
+    {
+        "id": "95181c074c8d1160",
+        "type": "http in",
+        "z": "7ac945370c3f7079",
+        "name": "",
+        "url": "/kayitol",
+        "method": "post",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 330,
+        "y": 460,
+        "wires": [
+            [
+                "c5bc8a7477d4919b"
+            ]
+        ]
+    },
+    {
+        "id": "eb70d6b918762a18",
+        "type": "http response",
+        "z": "7ac945370c3f7079",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 990,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "8bae3586f32af285",
+        "type": "subflow:a2ca8e0f1a28cb97",
+        "z": "7ac945370c3f7079",
+        "g": "34242816a322e249",
+        "name": "",
+        "x": 550,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c9fc0cccced5cc76",
+        "type": "subflow:93a0de60e9c91ce6",
+        "z": "7ac945370c3f7079",
+        "g": "34242816a322e249",
+        "name": "",
+        "x": 780,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c5bc8a7477d4919b",
+        "type": "subflow:84254be51afc5726",
+        "z": "7ac945370c3f7079",
+        "name": "",
+        "x": 680,
+        "y": 460,
+        "wires": [
+            [
+                "eb70d6b918762a18"
+            ]
+        ]
     }
 ]
